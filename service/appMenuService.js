@@ -1,7 +1,9 @@
 ﻿'use strict'
 //demo
-app.config(function ($routeProvider) {
+app.config(function($routeProvider) {
     $routeProvider
+
+
         .when("/demoFormInput", {
             templateUrl: "app/demoFormInput/template/input-form.html",
             controller: "appController"
@@ -10,12 +12,18 @@ app.config(function ($routeProvider) {
             templateUrl: "app/demoFormInput/template/input-form.html",
             controller: "appController"
         })
-        .otherwise({ redirectTo: '/demoFormInput' });
+        .when("/login", {
+            templateUrl: "app/login/template/login.html",
+            controller: "loginController"
+                // resolve: {
+                //     factory: checkPermission
+                // }
+        })
+        .otherwise({ redirectTo: '/login' });
 });
 
 
 
-var checkPermission = function (authService) {
+var checkPermission = function(authService) {
     authService.checkPermission();
 }
-

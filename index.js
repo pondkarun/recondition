@@ -5,7 +5,7 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
         $scope.test = function() {
             $location.path("demo" + "/156");
         }
-
+        let sd = false
         $scope.menuId = parseInt($routeParams.id);
         // console.log("this.menuId ", $scope.menuId);
     }
