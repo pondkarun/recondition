@@ -2528,7 +2528,7 @@ div#gridSearchSummaryReport[kendo-grid] table tbody tr td:first-of-type {
 }
 
 .bg-login-image {
-  background: url("../../images/ctiLogo.png");
+  background: url("../images/ctiLogo.png");
   background-position: center;
   background-size: cover;
 }
