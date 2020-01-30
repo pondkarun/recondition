@@ -10,15 +10,26 @@ $USERNAME = $postRequest->USERNAME;
 $PASSWORD = md5($postRequest->PASSWORD);
 
 
-$sql = "SELECT * FROM `employees` WHERE USERNAME = '" . $USERNAME . "' AND PASSWORD = '" . $PASSWORD . "' ";
+$sql = "SELECT 
+e.ID,
+e.USERNAME,
+e.EMPLOYEE_CODE,
+e.STATUS_ID, 
+dt.DATA_TOPICS AS STATUS
+FROM employees AS e 
+INNER JOIN data_topics AS dt ON dt.ID = e.STATUS_ID 
+WHERE USERNAME = '" . $USERNAME . "' AND PASSWORD = '" . $PASSWORD . "' ";
 $result = $condb->query($sql);
 
 if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
-    $response['statusLogin'] = 'loggedin';
+    $response['ID'] = $row["ID"];
     $response['USERNAME'] = $row["USERNAME"];
     $response['EMPLOYEE_CODE'] = $row["EMPLOYEE_CODE"];
-    $response['ID'] = $row["ID"];
+    $response['STATUS_ID'] = $row["STATUS_ID"];
+    $response['STATUS'] = $row["STATUS"];
+    $response['statusLogin'] = 'loggedin';
+
 
     $_SESSION['ID'] = $response['ID'];
     $_SESSION['USERNAME'] = $USERNAME;

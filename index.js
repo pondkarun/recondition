@@ -1,12 +1,26 @@
 ﻿'use strict'
 
-app.controller("appController", ['$scope', '$rootScope', '$location', '$routeParams',
-    function($scope, $rootScope, $location, $routeParams) {
-        $scope.test = function() {
-            $location.path("demo" + "/156");
+app.controller("appController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService',
+    function($scope, $rootScope, $location, $routeParams, userService) {
+
+        $scope.showMenu = () => {
+            if (!userService.isUserLoggedIn()) {
+                $scope.logOut()
+            }
+            return userService.isUserLoggedIn()
         }
-        let sd = false
-        $scope.menuId = parseInt($routeParams.id);
-        // console.log("this.menuId ", $scope.menuId);
+
+        $scope.logOut = () => {
+            localStorage.removeItem("login");
+            $location.path("login");
+        }
+
     }
 ]);
+
+/** 
+    $scope.test = function() {
+        $location.path("demo" + "/156");
+    }
+    $scope.menuId = parseInt($routeParams.id);
+ */

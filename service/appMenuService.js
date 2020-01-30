@@ -1,11 +1,11 @@
 ﻿'use strict'
 //demo
-app.config(function ($routeProvider) {
+app.config(function($routeProvider) {
     $routeProvider.when("/demoFormInput", {
         templateUrl: "app/demoFormInput/template/input-form.html",
         controller: "appController",
         resolve: {
-            check: function ($location, userService) {
+            check: function($location, userService) {
                 if (!userService.isUserLoggedIn()) {
                     $location.path('/login');
                 }
@@ -13,15 +13,29 @@ app.config(function ($routeProvider) {
         },
     }).when("/demo/:id", {
         templateUrl: "app/demoFormInput/template/input-form.html",
-        controller: "appController"
+        controller: "appController",
+        resolve: {
+            check: function($location, userService) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                }
+            },
+        },
     }).when("/login", {
         templateUrl: "app/login/template/login.html",
-        controller: "loginController"
+        controller: "loginController",
+        resolve: {
+            check: function($location, userService) {
+                if (userService.isUserLoggedIn()) {
+                    window.history.back()
+                }
+            },
+        },
     }).otherwise({ redirectTo: '/login' });
 });
 
 
 
-var checkPermission = function (authService) {
+var checkPermission = function(authService) {
     authService.checkPermission();
 }

@@ -14,3 +14,5 @@ if ($condb->connect_errno) {
     echo "Error : " . $condb->connect_error;
     exit();
 }
+
+require_once('function.php');
