@@ -6,11 +6,11 @@ $username_db = "smomscic";
 $password_db = "Jj*5cQ6)ub5VK1";
 $db_name = "smomscic_recond";
 
-$conn = new mysqli($localhost, $username_db, $password_db, $db_name);
-$conn->set_charset('utf8');
+$condb = new mysqli($localhost, $username_db, $password_db, $db_name);
+$condb->set_charset('utf8');
 date_default_timezone_set('Asia/Bangkok');
 
-if ($conn->connect_errno) {
-    echo "Error : " . $conn->connect_error;
+if ($condb->connect_errno) {
+    echo "Error : " . $condb->connect_error;
     exit();
 }

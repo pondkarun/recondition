@@ -1,27 +1,32 @@
 <?php
+session_start();
 require_once('../condb.php');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
+$input = file_get_contents("php://input");
+$postRequest = json_decode($input);
+
+$USERNAME = $postRequest->USERNAME;
+$PASSWORD = md5($postRequest->PASSWORD);
 
 
-// $input = file_get_contents("php://input");
-// $postRequest = json_decode($input);
+$sql = "SELECT * FROM `employees` WHERE USERNAME = '" . $USERNAME . "' AND PASSWORD = '" . $PASSWORD . "' ";
+$result = $condb->query($sql);
 
-// $ID = $postRequest->ID;
-// $SUPPLIES_NAME = $postRequest->SUPPLIES_NAME;
-// $PRICE = $postRequest->PRICE;
+if (mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_array($result);
+    $response['statusLogin'] = 'loggedin';
+    $response['USERNAME'] = $row["USERNAME"];
+    $response['EMPLOYEE_CODE'] = $row["EMPLOYEE_CODE"];
+    $response['ID'] = $row["ID"];
 
-// if ($ID) {
-//     $sql = " UPDATE supplies SET 
-//     SUPPLIES_NAME = '$SUPPLIES_NAME',
-//     PRICE = '$PRICE'
-//     WHERE ID = '$ID '";
+    $_SESSION['ID'] = $response['ID'];
+    $_SESSION['USERNAME'] = $USERNAME;
+} else {
+    $response['status'] = 'error';
+}
 
-//     $result = mysqli_query($condb, $sql) or die("Error in query: $sql" . mysqli_error());
-// } else {
-//     $sql = "INSERT INTO supplies (SUPPLIES_NAME , PRICE) VALUES ('$SUPPLIES_NAME' , '$PRICE')";
-//     $result = mysqli_query($condb, $sql) or die("Error in query: $sql" . mysqli_error());
+echo json_encode($response);
+/*
+print_r($_POST);*/
 // }
-
-$result = "sdsd";
-print_r($result);
