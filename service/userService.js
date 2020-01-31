@@ -1,6 +1,6 @@
 'use strict'
 
-app.service('userService', function() {
+app.service('userService', function () {
     var USERNAME;
     var EMPLOYEE_CODE;
     var STATUS;
@@ -8,21 +8,21 @@ app.service('userService', function() {
     var loggedin = false;
     var ID;
 
-    this.getName = function() {
+    this.getName = function () {
         return USERNAME;
     };
 
-    this.setID = function(userID) {
+    this.setID = function (userID) {
         ID = userID;
     };
-    this.getID = function() {
+    this.getID = function () {
         return ID;
     };
-    this.getLoggedin = function() {
+    this.getLoggedin = function () {
         return loggedin;
     };
 
-    this.saveData = function(data) {
+    this.saveData = function (data) {
         USERNAME = data.USERNAME;
         EMPLOYEE_CODE = data.EMPLOYEE_CODE;
         STATUS = data.STATUS;
@@ -32,13 +32,14 @@ app.service('userService', function() {
         localStorage.setItem('login', JSON.stringify({
             USERNAME: USERNAME,
             EMPLOYEE_CODE: EMPLOYEE_CODE,
+            STATUS_ID: STATUS_ID,
             STATUS: STATUS,
             ID: ID,
             loggedin: loggedin
         }));
     };
 
-    this.isUserLoggedIn = function() {
+    this.isUserLoggedIn = function () {
         if (localStorage.getItem('login')) {
             loggedin = true;
             var data = JSON.parse(localStorage.getItem('login'));
