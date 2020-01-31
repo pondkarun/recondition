@@ -16,9 +16,10 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
             // console.log("login", $scope.model);
             $http.post(webURL.webApi + "login/loginService.php", $scope.model).then((res) => {
 
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 if (res.data.statusLogin == 'loggedin') {
                     userService.saveData(res.data);
+                    $rootScope.getMenu();
                     $location.path("demo" + "/156");
                 } else {
                     alert('invalid login');

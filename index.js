@@ -3,6 +3,10 @@
 app.controller("appController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService',
     function($scope, $rootScope, $location, $routeParams, userService) {
 
+        this.init = () => {
+            // getMenu();
+        }
+
         $scope.showMenu = () => {
             if (!userService.isUserLoggedIn()) {
                 $scope.logOut()
@@ -14,6 +18,14 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
             localStorage.removeItem("login");
             $location.path("login");
         }
+
+        /** เรียก sidebar */
+        $rootScope.getMenu = () => {
+            let aaa = userService.getStatusID()
+            console.log("aaa", aaa);
+        }
+
+
 
     }
 ]);
