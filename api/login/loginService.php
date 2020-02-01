@@ -7,8 +7,7 @@ $input = file_get_contents("php://input");
 $postRequest = json_decode($input);
 
 $USERNAME = $postRequest->USERNAME;
-$PASSWORD = md5($postRequest->PASSWORD);
-
+$PASSWORD = $condb->real_escape_string($postRequest->PASSWORD);
 
 $sql = "SELECT 
 e.ID,

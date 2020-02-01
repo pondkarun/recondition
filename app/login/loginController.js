@@ -12,8 +12,8 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
 
         $scope.login = () => {
             loading.open();
-            let log = localStorage.getItem("login");
-            // console.log("login", $scope.model);
+            $scope.model.PASSWORD = md5($scope.model.PASSWORD);
+            console.log("login", $scope.model);
             $http.post(webURL.webApi + "login/loginService.php", $scope.model).then((res) => {
 
                 //console.log("res.data", res.data);
