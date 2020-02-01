@@ -5,8 +5,6 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
         $scope.menuShow = [];
         this.init = () => {
             $rootScope.getMenu();
-            console.log(webURL.webApi);
-
         }
 
         $scope.showMenu = () => {

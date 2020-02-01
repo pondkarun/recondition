@@ -27,11 +27,21 @@ app.config(function($routeProvider) {
         resolve: {
             check: function($location, userService) {
                 if (userService.isUserLoggedIn()) {
-                    $location.path("demo" + "/156");
+                    $location.path("account");
                 }
             },
         },
-    }).otherwise({ redirectTo: '/login' });
+    }).when("/account", {
+        templateUrl: "app/account/template/account.html",
+        controller: "accountController",
+        resolve: {
+            check: function($location, userService) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                }
+            },
+        },
+    }).otherwise({ redirectTo: '/account' });
 });
 
 

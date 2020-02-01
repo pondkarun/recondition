@@ -6,6 +6,10 @@
   background: #6b6e7b;
 }
 
+.card-body {
+  background-color: #fafafa;
+}
+
 /**
  * Functions for z-index management
  *
@@ -72,6 +76,10 @@
 
 .nav-item:hover {
   background: #6b6e7b;
+}
+
+.card-body {
+  background-color: #fafafa;
 }
 
 /*

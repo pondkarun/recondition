@@ -29,7 +29,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
                 if (res.data.statusLogin == 'loggedin') {
                     userService.saveData(res.data);
                     $rootScope.getMenu();
-                    $location.path("demo" + "/156");
+                    $location.path("/");
                 } else {
                     $scope.model.PASSWORD = null
                     showAlertBox('invalid login');
@@ -42,11 +42,11 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
 
         }
 
-        function showAlertBox(msg, callback) {
-            var dialog = customDialog.defaultObj();
-            dialog.content = msg;
-            customDialog.alert(callback, dialog);
-        }
+        // function showAlertBox(msg, callback) {
+        //     var dialog = customDialog.defaultObj();
+        //     dialog.content = msg;
+        //     customDialog.alert(callback, dialog);
+        // }
 
     }
 ]);
