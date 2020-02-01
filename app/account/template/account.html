@@ -45,7 +45,7 @@
                                     <div layout-gt-sm="row">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>E-Mail</label>
-                                            <input type="email" ng-model="modelSave.EMAIL" ng-disabled="false">
+                                            <input type="email" ng-model="modelSave.EMAIL" ng-disabled="false" required>
                                         </md-input-container>
                                     </div>
 
@@ -79,13 +79,22 @@
 
                                     <div layout-gt-sm="row">
                                         <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Confirm Password</label>
-                                            <input type="password" ng-model="modelSave.PASSWORS_CON" ng-disabled="false" required>
+                                            <label>New Password</label>
+                                            <input type="password" ng-model="modelSave.NEW_PASSWORD" ng-disabled="false">
                                         </md-input-container>
                                     </div>
 
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Confirm Password</label>
+                                            <input type="password" ng-model="modelSave.CON_PASSWORS" ng-disabled="false" ng-required="modelSave.NEW_PASSWORD">
+                                        </md-input-container>
+                                    </div>
+
+
+
                                     <div class="footer-form-button" layout="row" layout-align="center center">
-                                        <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="saveForm()" ng-disabled="!(modelSave.PASSWORD && modelSave.PASSWORS_CON)">
+                                        <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="saveForm()">
                                             Save
                                         </md-button>
 
