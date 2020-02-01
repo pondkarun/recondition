@@ -1,16 +1,26 @@
 'use strict'
 
-app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http',
-    function($scope, $rootScope, $location, $routeParams, userService, $http) {
+app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings',
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
 
         $scope.model = {
             USERNAME: null,
             PASSWORD: null
         }
 
-        this.init = function() {}
+        this.init = function() {
+            var callback = (res) => {
+                $('.k-window').css("visibility", "visible");
+                $('.k-overlay').css("display", "block");
+            }
+            $('.k-window').css("visibility", "hidden");
+            $('.k-overlay').css("display", "none");
+            showAlertBox(msgSettings.msgValidForm, callback);
+        }
 
         $scope.login = () => {
+
+
             loading.open();
             $scope.model.PASSWORD = md5($scope.model.PASSWORD);
             $http.post(webURL.webApi + "login/loginService.php", $scope.model).then((res) => {
@@ -22,7 +32,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
                     $location.path("demo" + "/156");
                 } else {
                     $scope.model.PASSWORD = null
-                    alert('invalid login');
+                    showAlertBox('invalid login');
                 }
             }).catch((err) => {
 
@@ -32,6 +42,11 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
 
         }
 
+        function showAlertBox(msg, callback) {
+            var dialog = customDialog.defaultObj();
+            dialog.content = msg;
+            customDialog.alert(callback, dialog);
+        }
 
     }
 ]);
