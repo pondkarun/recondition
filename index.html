@@ -30,10 +30,10 @@
             </a>
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item active" ng-repeat="item in menuShow ">
+                <a class="nav-link" ng-src="">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>{{item.MENU_NAME}}</span></a>
             </li>
 
             <hr class="sidebar-divider d-none d-md-block">

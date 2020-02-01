@@ -1,31 +1,51 @@
 ﻿'use strict'
 
-app.controller("appController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService',
-    function($scope, $rootScope, $location, $routeParams, userService) {
-
+app.controller("appController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http',
+    function($scope, $rootScope, $location, $routeParams, userService, $http) {
+        $scope.menuShow = [];
         this.init = () => {
-            // getMenu();
+
         }
 
         $scope.showMenu = () => {
             if (!userService.isUserLoggedIn()) {
-                $scope.logOut()
+                localStorage.removeItem("login");
+                $location.path("login");
             }
             return userService.isUserLoggedIn()
         }
 
         $scope.logOut = () => {
+            location.reload();
             localStorage.removeItem("login");
             $location.path("login");
         }
 
         /** เรียก sidebar */
         $rootScope.getMenu = () => {
-            let aaa = userService.getStatusID()
-            console.log("aaa", aaa);
+            $scope.menuShow = [];
+            loading.open();
+            let StatusID = userService.getStatusID()
+            $http.post(webURL.webApi + "menu/menuService.php", StatusID).then((res) => {
+                // console.log("res.data", res.data);
+                for (let i = 0; i < res.data.length; i++) {
+                    $scope.menuShow.push(res.data[i]);
+                }
+                console.log("$scope.menuShow", $scope.menuShow);
+                loading.close();
+            }).catch((err) => {
+                loading.close();
+                console.log("Error");
+            })
         }
 
-
+        if (userService.isUserLoggedIn()) {
+            $rootScope.getMenu();
+        }
+        // $scope.$watch($scope.menuShow, function(newValue, oldValue) {
+        //     console.log("menuShow", $scope.menuShow);
+        //     $scope.menuShow = $scope.menuShow;
+        // });
 
     }
 ]);

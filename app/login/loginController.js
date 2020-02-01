@@ -13,7 +13,6 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
         $scope.login = () => {
             loading.open();
             $scope.model.PASSWORD = md5($scope.model.PASSWORD);
-            console.log("login", $scope.model);
             $http.post(webURL.webApi + "login/loginService.php", $scope.model).then((res) => {
 
                 //console.log("res.data", res.data);
@@ -22,6 +21,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
                     $rootScope.getMenu();
                     $location.path("demo" + "/156");
                 } else {
+                    $scope.model.PASSWORD = null
                     alert('invalid login');
                 }
             }).catch((err) => {
