@@ -4,6 +4,8 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
     function($scope, $rootScope, $location, $routeParams, userService, $http) {
         $scope.menuShow = [];
         this.init = () => {
+            $rootScope.getMenu();
+            console.log(webURL.webApi);
 
         }
 
@@ -13,6 +15,11 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
                 $location.path("login");
             }
             return userService.isUserLoggedIn()
+        }
+
+        $scope.routep = (item) => {
+            // console.log("item", item);
+            $location.path(item);
         }
 
         $scope.logOut = () => {
@@ -31,7 +38,6 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
                 for (let i = 0; i < res.data.length; i++) {
                     $scope.menuShow.push(res.data[i]);
                 }
-                console.log("$scope.menuShow", $scope.menuShow);
                 loading.close();
             }).catch((err) => {
                 loading.close();
@@ -39,9 +45,7 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
             })
         }
 
-        if (userService.isUserLoggedIn()) {
-            $rootScope.getMenu();
-        }
+
         // $scope.$watch($scope.menuShow, function(newValue, oldValue) {
         //     console.log("menuShow", $scope.menuShow);
         //     $scope.menuShow = $scope.menuShow;

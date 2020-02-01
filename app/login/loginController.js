@@ -9,13 +9,13 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
         }
 
         this.init = function() {
-            var callback = (res) => {
-                $('.k-window').css("visibility", "visible");
-                $('.k-overlay').css("display", "block");
-            }
-            $('.k-window').css("visibility", "hidden");
-            $('.k-overlay').css("display", "none");
-            showAlertBox(msgSettings.msgValidForm, callback);
+            // var callback = (res) => {
+            //     $('.k-window').css("visibility", "visible");
+            //     $('.k-overlay').css("display", "block");
+            // }
+            // $('.k-window').css("visibility", "hidden");
+            // $('.k-overlay').css("display", "none");
+            // showAlertBox(msgSettings.msgValidForm, callback);
         }
 
         $scope.login = () => {

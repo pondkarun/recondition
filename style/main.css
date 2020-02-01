@@ -1,3 +1,11 @@
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #6b6e7b;
+}
+
 /**
  * Functions for z-index management
  *
@@ -58,6 +66,14 @@
 /**
  * Sets the z-index to below all layers.
  */
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #6b6e7b;
+}
+
 /*
 == malihu jquery custom scrollbar plugin ==
 Plugin URI: http://manos.malihu.gr/jquery-custom-content-scroller

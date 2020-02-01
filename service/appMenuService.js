@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
         resolve: {
             check: function($location, userService) {
                 if (userService.isUserLoggedIn()) {
-                    window.history.back()
+                    $location.path("demo" + "/156");
                 }
             },
         },
