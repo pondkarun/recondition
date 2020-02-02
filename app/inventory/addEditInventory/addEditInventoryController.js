@@ -5,7 +5,6 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
         let _this = this;
         this.modelSave = [];
         $scope.listType = [];
-        $scope.modelSave = {};
         $scope.model = {};
 
 
@@ -111,8 +110,10 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
                 if ($scope.model.DisposedDate) {
                     $scope.model.DisposedDate_NAME = commonService.formatDate($scope.model.DisposedDate)
                     $scope.model.DisposedDate = commonService.formatDatDB($scope.model.DisposedDate)
+                } else {
+                    $scope.model.DisposedDate = null
                 }
-                console.log("model", $scope.model);
+                // console.log("model", $scope.model);
                 _this.modelSave.push($scope.model)
                 _this.gridOptions.dataSource.data(_this.modelSave);
 
@@ -122,8 +123,26 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
                 }
             }
         }
+        this.cancelForm = () => {
+            $location.path("inventory");
+        }
+
         this.saveForm = () => {
             console.log("modelSave", _this.modelSave);
+            if (_this.modelSave.length <= 0) {
+                showAlertBox(msgSettings.msgValidForm, null);
+            } else {
+
+                $http.post(webURL.webApi + "inventory/addInventoryService.php", _this.modelSave).then((res) => {
+                    // console.log("res.data", res.data);
+                    showAlertBox(msgSettings.msgSaveSucc, null);
+                }).catch((err) => {
+                    showAlertBox(msgSettings.msgNotSave, null);
+                }).finally(() => {
+                    $location.path("inventory");
+                });
+
+            }
         }
 
 

@@ -28,17 +28,13 @@
                                         </md-option>
                                     </span>
                                 </md-select>
-                                <div ng-messages="projectForm.clientName.$error">
-                                    <div ng-message="required">This is required.</div>
-                                </div>
+
                             </md-input-container>
 
                             <md-input-container flex="50">
                                 <label>Brand</label>
                                 <input name="Brand" ng-model="model.BRAND" ng-required="true" autocomplete="off">
-                                <div ng-messages="projectForm.clientName.$error">
-                                    <div ng-message="required">This is required.</div>
-                                </div>
+
                             </md-input-container>
                         </div>
 
@@ -46,17 +42,12 @@
                             <md-input-container flex="50">
                                 <label>Model</label>
                                 <input name="Model" ng-model="model.MODEL" ng-required="true" autocomplete="off">
-                                <div ng-messages="projectForm.clientName.$error">
-                                    <div ng-message="required">This is required.</div>
-                                </div>
+
                             </md-input-container>
 
                             <md-input-container flex="50">
                                 <label>Serial</label>
-                                <input name="clientName" ng-model="model.SERIAL" ng-required="true" autocomplete="off">
-                                <div ng-messages="projectForm.clientName.$error">
-                                    <div ng-message="required">This is required.</div>
-                                </div>
+                                <input name="clientName" ng-model="model.SERIAL" autocomplete="off">
                             </md-input-container>
                         </div>
 
@@ -64,9 +55,7 @@
                             <md-input-container>
                                 <label>Purchase Date</label>
                                 <md-datepicker ng-model="model.PurchaseDate" md-open-on-focus ng-required="true"></md-datepicker>
-                                <div ng-messages="projectForm.clientName.$error">
-                                    <div ng-message="required">This is required.</div>
-                                </div>
+
                             </md-input-container>
 
                             <md-input-container>
