@@ -153,11 +153,14 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
         }
 
         const getTypeInventory = () => {
+            loading.open();
             $http.get(webURL.webApi + "inventory/getTypeInventoryService.php").then((res) => {
                 // console.log("res.data", res.data);
+                loading.close();
                 $scope.listType = res.data
             }).catch((err) => {
                 console.log("Error");
+                loading.close();
                 showAlertBox(msgSettings.msgErrorApi, null);
             })
         }

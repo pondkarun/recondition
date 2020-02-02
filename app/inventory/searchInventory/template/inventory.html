@@ -14,6 +14,52 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <div class="card-body">
+
+                    <div layout="row">
+                        <h4 class="pr-3">ค้นหา :</h4>
+                        <md-input-container flex="10">
+                            <label>ID</label>
+                            <input name="ID" ng-model="ctrl.modelSearch.INVENTORY_CODE">
+                        </md-input-container>
+
+                        <md-input-container flex="15">
+                            <label>Type</label>
+                            <md-select name="type" ng-model="ctrl.modelSearch.TYPE_ID">
+                                <span ng-repeat="x in listType">
+                                    <md-option  value="{{x.ID}}">
+                                        {{x.DATA_TOPICS}}
+                                    </md-option>
+                                </span>
+                            </md-select>
+
+                        </md-input-container>
+
+                        <md-input-container flex="20">
+                            <label>BRAND</label>
+                            <input name="BRAND" ng-model="ctrl.modelSearch.BRAND">
+                        </md-input-container>
+
+                        <md-input-container flex="20">
+                            <label>Model</label>
+                            <input name="Model" ng-model="ctrl.modelSearch.MODEL">
+
+                        </md-input-container>
+
+                        <md-input-container flex="15">
+                            <label>Serial</label>
+                            <input name="clientName" ng-model="ctrl.modelSearch.SERIAL">
+                        </md-input-container>
+
+                        <md-input-container flex="" class="pl-3">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchInventory()">
+                                <i class="fas fa-search fa-sm text-white-50"></i> ค้นหา
+                            </button>
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearInventory()">
+                                <i class="fas fa-repeat fa-sm text-white-50"></i> ค่าเริ่มต้น
+                            </button>
+                        </md-input-container>
+
+                    </div>
                     <grid-search flex="100" g-option="ctrl.gridOptions"></grid-search>
                 </div>
             </div>

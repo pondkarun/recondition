@@ -73,13 +73,15 @@ app.controller("accountController", ['$scope', '$rootScope', '$location', '$rout
         }
 
         function saveData(item) {
-            //loading.open();
+            loading.open();
             $http.post(webURL.webApi + "user/editUserProfileService.php", item).then((res) => {
                 //console.log("res.data", res.data);
                 showAlertBox(msgSettings.msgSaveSucc, null);
             }).catch((err) => {
+                loading.close();
                 showAlertBox(msgSettings.msgNotSave, null);
             }).finally(() => {
+                loading.close();
                 let ID = userService.getID();
                 getUserProfile(_this.ID)
             });

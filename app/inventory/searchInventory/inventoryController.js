@@ -1,13 +1,20 @@
 'use strict'
 
-app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
+app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
-        $scope.modelSave = {};
+        this.modelSearch = {
+            INVENTORY_CODE: null,
+            BRAND: null,
+            TYPE_ID: null,
+            MODEL: null,
+            SERIAL: null
+        };
         _this.ID = userService.getID();
 
         this.init = function() {
-
+            getTypeInventory();
+            _this.searchInventory();
         }
 
         this.gridOptions = {
@@ -17,41 +24,65 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             pageable: true,
             columns: [{
                     field: "INVENTORY_CODE",
-                    title: "ID"
+                    title: "ID",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "TYPE",
-                    title: "Type"
+                    title: "Type",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "BRAND",
-                    title: "Brand"
+                    title: "Brand",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "MODEL",
-                    title: "Model"
+                    title: "Model",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "SERIAL",
-                    title: "Serial"
+                    title: "Serial",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "PurchaseDate",
-                    title: "Purchase Date"
+                    title: "Purchase Date",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
 
                 {
                     field: "DisposedDate",
-                    title: "Disposed Date"
+                    title: "Disposed Date",
+                    attributes: {
+                        class: "text-center"
+                    }
                 },
                 {
                     field: "STATUS",
-                    title: "Status"
+                    title: "Status",
+                    attributes: {
+                        class: "text-center"
+                    }
                 }
             ],
             management: true,
@@ -64,8 +95,50 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
         };
 
         this.addInventory = () => {
-            //alert("เพิ่ม");
             $location.path("inventory" + "/add/" + 0);
+        }
+
+        const getTypeInventory = () => {
+            $http.get(webURL.webApi + "inventory/getTypeInventoryService.php").then((res) => {
+                $scope.listType = res.data
+            }).catch((err) => {
+                console.log("Error");
+                showAlertBox(msgSettings.msgErrorApi, null);
+            })
+        }
+
+        this.searchInventory = () => {
+            // console.log("modelSearch", _this.modelSearch);
+            loading.open();
+            $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {
+                // console.log("res.data", res.data);
+                res.data.filter((e) => {
+                    e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
+                    if (e.DisposedDate) {
+                        e.DisposedDate = commonService.formatDate(e.DisposedDate)
+                    } else {
+                        e.DisposedDate = "-"
+                    }
+
+                })
+                _this.gridOptions.dataSource.data(res.data);
+                loading.close();
+            }).catch((err) => {
+                console.log("Error");
+                loading.close();
+                showAlertBox(msgSettings.msgErrorApi, null);
+            })
+        }
+
+        this.clearInventory = () => {
+            _this.modelSearch = {
+                INVENTORY_CODE: null,
+                BRAND: null,
+                TYPE_ID: null,
+                MODEL: null,
+                SERIAL: null
+            };
+            _this.searchInventory();
         }
 
         function showAlertBox(msg, callback) {
