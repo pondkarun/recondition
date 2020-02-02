@@ -42,8 +42,18 @@ app.config(function($routeProvider) {
             },
         },
     }).when("/inventory", {
-        templateUrl: "app/inventory/template/inventory.html",
+        templateUrl: "app/inventory/searchInventory/template/inventory.html",
         controller: "inventoryController",
+        resolve: {
+            check: function($location, userService) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                }
+            },
+        },
+    }).when("/inventory/:type/:ID", {
+        templateUrl: "app/inventory/addEditInventory/template/addEditInventory.html",
+        controller: "addEditInventoryController",
         resolve: {
             check: function($location, userService) {
                 if (!userService.isUserLoggedIn()) {

@@ -51,10 +51,3 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
 
     }
 ]);
-
-/** 
-    $scope.test = function() {
-        $location.path("demo" + "/156");
-    }
-    $scope.menuId = parseInt($routeParams.id);
- */
