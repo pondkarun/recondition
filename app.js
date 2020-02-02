@@ -36,5 +36,7 @@ app.constant('msgSettings', {
     msgLogInFail: 'กรุณาตรวจสอบข้อมูลที่ระบบกำลังพล',
     msgTextSearch: 'กรุณากรอกข้อมูลที่ต้องการค้นหา',
     msgUnlikePassword: 'รหัสผ่านไม่ตรงกัน',
-    msgErrPassword: 'รหัสผ่านไม่ถูกต้อง'
+    msgErrPassword: 'รหัสผ่านไม่ถูกต้อง',
+    msgErrorApi: 'มีบางอย่างผิดพลาด! กรุณาลองใหม่อีกครั้ง'
+
 });

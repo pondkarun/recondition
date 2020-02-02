@@ -41,7 +41,17 @@ app.config(function($routeProvider) {
                 }
             },
         },
-    }).otherwise({ redirectTo: '/account' });
+    }).when("/inventory", {
+        templateUrl: "app/inventory/template/inventory.html",
+        controller: "inventoryController",
+        resolve: {
+            check: function($location, userService) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                }
+            },
+        },
+    }).otherwise({ redirectTo: '/inventory' });
 });
 
 

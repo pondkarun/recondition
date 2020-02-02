@@ -54,12 +54,14 @@ app.controller("accountController", ['$scope', '$rootScope', '$location', '$rout
                     $scope.modelSave = res.data
                 } else {
                     console.log("Error");
+                    showAlertBox(msgSettings.msgTryAgain, null);
                 }
-                console.log("$scope.modelSave", $scope.modelSave);
+                // console.log("$scope.modelSave", $scope.modelSave);
                 loading.close();
             }).catch((err) => {
                 loading.close();
                 console.log("Error");
+                showAlertBox(msgSettings.msgErrorApi, null);
             })
         }
 
@@ -73,7 +75,7 @@ app.controller("accountController", ['$scope', '$rootScope', '$location', '$rout
         function saveData(item) {
             //loading.open();
             $http.post(webURL.webApi + "user/editUserProfileService.php", item).then((res) => {
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 showAlertBox(msgSettings.msgSaveSucc, null);
             }).catch((err) => {
                 showAlertBox(msgSettings.msgNotSave, null);
