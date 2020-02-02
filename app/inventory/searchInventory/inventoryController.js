@@ -41,10 +41,14 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                 },
 
                 {
-                    field: "CREATE_DATE",
-                    title: "Create Date"
+                    field: "PurchaseDate",
+                    title: "Purchase Date"
                 },
 
+                {
+                    field: "DisposedDate",
+                    title: "Disposed Date"
+                },
                 {
                     field: "STATUS",
                     title: "Status"

@@ -28,7 +28,7 @@ app.directive("gridSearch", [function() {
                         title: "การจัดการ",
                         attributes: {
                             // "data-title": "การจัดการ",
-                            "class": "wrapper-btn-grid",
+                            "class": "text-center",
                         }
                     }
                     res.push(btnStatus)
@@ -70,30 +70,27 @@ app.directive("gridSearch", [function() {
 
             $scope.setOperation = function(operation) {
                 let arr = [];
-                //if (operation.sort) {
-                //    arr.push({ template: '<div ng-class="checkIndex(dataItem)" ng-click="ctrl.onSortUp(dataItem,ctrl.setIndex(dataItem))"></div><div ng-class="ctrl.checkIndexDown(dataItem)" ng-click="ctrl.onSortDown(dataItem,ctrl.setIndex(dataItem))"></div>' })
-                //}
 
 
                 if (operation.view) {
                     if (operation.disabledModeView == undefined || operation.disabledModeView == false) {
-                        arr.push({ template: '<img ng-click="onView(dataItem)" class="btn-grid" ng-src="image/ui_view_table_active_btn.png">' })
+                        arr.push({ template: '<img ng-click="onView(dataItem)" class="btn-grid" ng-src="images/ui_view_table_active_btn.png">' })
                     } else if (operation.disabledModeView == true) {
-                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;" class="btn-grid" ng-src="image/ui_view_table_active_btn.png">' })
+                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;" class="btn-grid" ng-src="images/ui_view_table_active_btn.png">' })
                     }
                 }
                 if (operation.edit) {
                     if (operation.disabledModeView == undefined || operation.disabledModeView == false) {
-                        arr.push({ template: '<img ng-click="onEdit(dataItem)" ng-if="dataItem.privilege==3" class="btn-grid" ng-src="image/ui_edit_table_active_btn.png">' })
+                        arr.push({ template: '<img ng-click="onEdit(dataItem)"  class="btn-grid" ng-src="images/ui_edit_table_active_btn.png">' })
                     } else if (operation.disabledModeView == true) {
-                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;" ng-if="dataItem.privilege==3" class="btn-grid" ng-src="image/ui_edit_table_active_btn.png">' })
+                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;"  class="btn-grid" ng-src="images/ui_edit_table_active_btn.png">' })
                     }
                 }
                 if (operation.del) {
                     if (operation.disabledModeView == undefined || operation.disabledModeView == false) {
-                        arr.push({ template: '<img ng-click="onDel(dataItem)" ng-if="dataItem.privilege==3" class="btn-grid" ng-src="image/ui_delete_table_active_btn.png">' })
+                        arr.push({ template: '<img ng-click="onDel(dataItem)"  class="btn-grid" ng-src="images/ui_delete_table_active_btn.png">' })
                     } else if (operation.disabledModeView == true) {
-                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;" ng-if="dataItem.privilege==3" class="btn-grid" ng-src="image/ui_delete_table_active_btn.png">' })
+                        arr.push({ template: '<img style="opacity:0.75; filter: grayscale(100%); cursor: not-allowed;"  class="btn-grid" ng-src="images/ui_delete_table_active_btn.png">' })
                     }
                 }
                 return arr;
