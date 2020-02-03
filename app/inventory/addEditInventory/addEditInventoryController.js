@@ -15,7 +15,7 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
             getTypeInventory();
             if (_this.typePage.type == "edit") {
                 $scope.typeAdd = false;
-
+                getInventoryEdit(_this.typePage.ID);
             } else {
                 $scope.typeAdd = true;
                 $scope.model.PurchaseDate = new Date();
@@ -157,15 +157,24 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
             if (!$scope.projectForm.$valid) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
-                console.log("model", $scope.model);
-                // $http.post(webURL.webApi + "inventory/addInventoryService.php", _this.modelSave).then((res) => {
-                //     // console.log("res.data", res.data);
-                //     showAlertBox(msgSettings.msgSaveSucc, null);
-                // }).catch((err) => {
-                //     showAlertBox(msgSettings.msgNotSave, null);
-                // }).finally(() => {
-                //     $location.path("inventory");
-                // });
+
+                let model = angular.copy($scope.model)
+                model.ID = _this.typePage.ID
+                model.PurchaseDate = commonService.formatDatDB(model.PurchaseDate)
+                if (model.DisposedDate) {
+                    model.DisposedDate = commonService.formatDatDB(model.DisposedDate)
+                }
+
+                // console.log("model", model);
+
+                $http.post(webURL.webApi + "inventory/updateInventoryService.php", model).then((res) => {
+                    // console.log("res.data", res.data);
+                    showAlertBox(msgSettings.msgSaveSucc, null);
+                }).catch((err) => {
+                    showAlertBox(msgSettings.msgNotSave, null);
+                }).finally(() => {
+                    $location.path("inventory");
+                });
             }
         }
 
@@ -182,6 +191,25 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
                 // console.log("res.data", res.data);
                 loading.close();
                 $scope.listType = res.data
+            }).catch((err) => {
+                console.log("Error");
+                loading.close();
+                showAlertBox(msgSettings.msgErrorApi, null);
+            })
+        }
+        const getInventoryEdit = (ID) => {
+            loading.open();
+            $http.post(webURL.webApi + "inventory/getInventoryEditService.php", ID).then((res) => {
+                // console.log("res.data", res.data);
+                res.data.PurchaseDate = new Date(res.data.PurchaseDate)
+                if (res.data.DisposedDate == '0000-00-00') {
+                    res.data.DisposedDate = null
+                } else {
+                    res.data.DisposedDate = new Date(res.data.DisposedDate)
+                }
+
+                $scope.model = res.data
+                loading.close();
             }).catch((err) => {
                 console.log("Error");
                 loading.close();

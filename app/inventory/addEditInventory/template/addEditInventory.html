@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form name="projectForm" class="container" novalidate>
 
-                        <div layout="row" ng-if="false">
+                        <div layout="row" ng-if="!typeAdd">
                             <md-input-container class="md-block" flex="25">
                                 <label>ID</label>
                                 <input type="text" ng-model="model.INVENTORY_CODE" ng-disabled="true">
@@ -82,11 +82,6 @@
 
                         <hr ng-if="typeAdd">
                         <section>
-                            <div class="pb-5" ng-if="typeAdd">
-                                <grid-search flex="100" g-option="ctrl.gridOptions"
-                                    on-callback-del="ctrl.gridCallbackDel">
-                                </grid-search>
-                            </div>
 
                             <div class="footer-form-button pt-5" layout="row" layout-align="center center"
                                 ng-if="!typeAdd">
