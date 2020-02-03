@@ -23,7 +23,7 @@
                                 <label>Type</label>
                                 <md-select name="type" ng-model="model.TYPE_ID" ng-required="true">
                                     <span ng-repeat="x in listType">
-                                        <md-option  value="{{x.ID}}">
+                                        <md-option value="{{x.ID}}">
                                             {{x.DATA_TOPICS}}
                                         </md-option>
                                     </span>
@@ -54,7 +54,8 @@
                         <div layout="row">
                             <md-input-container>
                                 <label>Purchase Date</label>
-                                <md-datepicker ng-model="model.PurchaseDate" md-open-on-focus ng-required="true"></md-datepicker>
+                                <md-datepicker ng-model="model.PurchaseDate" md-open-on-focus ng-required="true">
+                                </md-datepicker>
 
                             </md-input-container>
 
@@ -65,33 +66,59 @@
 
                             <md-input-container flex="30" class="pl-3">
                                 <label>Status</label>
-                                <md-select name="type" ng-model="model.STATUS" required>
+                                <md-select name="type" ng-model="model.STATUS" ng-required="true">
                                     <md-option value="ใช้งาน">ใช้งาน</md-option>
                                     <md-option value="หมดอายุการใช้งาน">หมดอายุการใช้งาน</md-option>
                                 </md-select>
                             </md-input-container>
 
-                            <md-input-container flex="30" class="pl-3">
-                                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.addInventory()">
+                            <md-input-container flex="30" class="pl-3" ng-if="typeAdd">
+                                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+                                    ng-click="ctrl.addInventory()">
                                     <i class="fas fa-plus fa-sm text-white-50"></i> Add IT Inventory
                                 </button>
                             </md-input-container>
                         </div>
 
-                        <hr>
+                        <hr ng-if="typeAdd">
+                        <section>
+                            <div class="pb-5" ng-if="typeAdd">
+                                <grid-search flex="100" g-option="ctrl.gridOptions"
+                                    on-callback-del="ctrl.gridCallbackDel">
+                                </grid-search>
+                            </div>
+
+                            <div class="footer-form-button pt-5" layout="row" layout-align="center center"
+                                ng-if="!typeAdd">
+
+                                <md-button type="submit" class="md-raised md-primary" layout="row"
+                                    layout-align="center center" ng-click="ctrl.saveEditForm()">
+                                    Save
+                                </md-button>
+
+                                <md-button type="button" class="md-raised md-secondary" layout="row"
+                                    layout-align="center center" ng-click="ctrl.cancelForm()">
+                                    Cancel
+                                </md-button>
+                            </div>
+                        </section>
                     </form>
 
-                    <section class=" pt-3">
+                    <section class="pt-3" ng-if="typeAdd">
                         <div class="pb-5">
-                            <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-del="ctrl.gridCallbackDel"></grid-search>
+                            <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-del="ctrl.gridCallbackDel">
+                            </grid-search>
                         </div>
 
                         <div class="footer-form-button pt-5" layout="row" layout-align="center center">
-                            <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="ctrl.saveForm()">
+
+                            <md-button type="submit" class="md-raised md-primary" layout="row"
+                                layout-align="center center" ng-click="ctrl.saveForm()">
                                 Save
                             </md-button>
 
-                            <md-button type="button" class="md-raised md-secondary" layout="row" layout-align="center center" ng-click="ctrl.cancelForm()">
+                            <md-button type="button" class="md-raised md-secondary" layout="row"
+                                layout-align="center center" ng-click="ctrl.cancelForm()">
                                 Cancel
                             </md-button>
                         </div>

@@ -1,19 +1,26 @@
 'use strict'
 
 app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSave = [];
         $scope.listType = [];
         $scope.model = {};
+        this.typePage = {}
 
 
-        this.init = function() {
+        this.init = function () {
             //alert("เพิ่ม");
-            // $scope.menuId = parseInt($routeParams.id);
-            $scope.model.PurchaseDate = new Date();
-            $scope.model.STATUS = "ใช้งาน";
+            _this.typePage = $routeParams;
             getTypeInventory();
+            if (_this.typePage.type == "edit") {
+                $scope.typeAdd = false;
+
+            } else {
+                $scope.typeAdd = true;
+                $scope.model.PurchaseDate = new Date();
+                $scope.model.STATUS = "ใช้งาน";
+            }
         }
 
         this.gridOptions = {
@@ -128,7 +135,7 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
         }
 
         this.saveForm = () => {
-            console.log("modelSave", _this.modelSave);
+            // console.log("modelSave", _this.modelSave);
             if (_this.modelSave.length <= 0) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
@@ -142,6 +149,23 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
                     $location.path("inventory");
                 });
 
+            }
+        }
+
+        this.saveEditForm = () => {
+
+            if (!$scope.projectForm.$valid) {
+                showAlertBox(msgSettings.msgValidForm, null);
+            } else {
+                console.log("model", $scope.model);
+                // $http.post(webURL.webApi + "inventory/addInventoryService.php", _this.modelSave).then((res) => {
+                //     // console.log("res.data", res.data);
+                //     showAlertBox(msgSettings.msgSaveSucc, null);
+                // }).catch((err) => {
+                //     showAlertBox(msgSettings.msgNotSave, null);
+                // }).finally(() => {
+                //     $location.path("inventory");
+                // });
             }
         }
 
