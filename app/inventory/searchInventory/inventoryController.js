@@ -123,12 +123,8 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                     } else {
                         e.DisposedDate = "-"
                     }
-                    e.numberArr = parseInt(e.INVENTORY_CODE.substring(2, 6));
                 })
 
-                res.data.sort(function (a, b) {
-                    return a.numberArr - b.numberArr;
-                });
                 _this.gridOptions.dataSource.data(res.data);
                 loading.close();
             }).catch((err) => {

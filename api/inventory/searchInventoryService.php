@@ -47,6 +47,9 @@ try {
         $query .= " AND (i.SERIAL like '%" . $SERIAL . "%') ";
     }
 
+    $query .= " ORDER BY i.INVENTORY_CODE ASC ";
+
+
     $result = $condb->query($query) or die($condb->error);
 
     while ($row = $result->fetch_assoc()) {
