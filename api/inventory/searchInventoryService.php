@@ -20,6 +20,7 @@ $data = array();
 try {
 
     $query = "SELECT 
+    i.ID,
     i.INVENTORY_CODE,
     i.BRAND,
     d.DATA_TOPICS AS TYPE,

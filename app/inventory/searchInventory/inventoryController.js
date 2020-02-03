@@ -93,7 +93,10 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             },
             showIndex: false,
         };
-
+        this.gridCallbackEdit = (item) => {
+            // console.log("item", item);
+            $location.path("inventory" + "/edit/" + item.ID);
+        }
         this.addInventory = () => {
             $location.path("inventory" + "/add/" + 0);
         }
@@ -122,7 +125,6 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                     }
                     e.numberArr = parseInt(e.INVENTORY_CODE.substring(2, 6));
                 })
-                console.log(res.data);
 
                 res.data.sort(function (a, b) {
                     return a.numberArr - b.numberArr;
