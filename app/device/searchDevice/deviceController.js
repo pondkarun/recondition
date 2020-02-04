@@ -71,8 +71,8 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
                 },
 
                 {
-                    field: "EXPIRED_DATE",
-                    title: "Disposed Date",
+                    field: "STATUS",
+                    title: "Status",
                     attributes: {
                         class: "text-center"
                     }

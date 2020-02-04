@@ -9,14 +9,13 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         this.Inventory = [];
         this.Users = [];
 
-
-
         this.init = function() {
             checkRouteParams()
             if ($scope.typeAdd) {
                 getUsers();
                 getInventory();
             }
+
         }
 
         this.gridOptions = {
@@ -24,10 +23,16 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
             dataSource: new kendo.data.DataSource({ data: [], pageSize: 10 }),
             sortable: true,
             pageable: true,
-            columns: [
+            columns: [{
+                    field: "INVENTORY_CODE",
+                    title: "ID",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
                 {
-                    field: "TYPE_NAME",
+                    field: "TYPE",
                     title: "Type",
                     attributes: {
                         class: "text-center"
@@ -35,40 +40,32 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
                 },
 
                 {
-                    field: "BRAND",
-                    title: "Brand",
+                    field: "NAME_TH",
+                    title: "Name",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "MODEL",
-                    title: "Model",
+                    field: "DEPARTMENT",
+                    title: "Department",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "SERIAL",
-                    title: "Serial",
+                    field: "ID_Staff",
+                    title: "ID Staff",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "PurchaseDate_NAME",
-                    title: "Purchase Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "DisposedDate_NAME",
-                    title: "Disposed Date",
+                    field: "CREATE_DATE",
+                    title: "Create Date",
                     attributes: {
                         class: "text-center"
                     }
@@ -93,18 +90,33 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
 
         //ลบข้อมูลในตาราง
         this.gridCallbackDel = (item) => {
-            console.log("item", item);
-            // let delIndex = _this.modelSave.findIndex(x => x.arrNumber == item.arrNumber);
-            // _this.modelSave.splice(delIndex, 1);
-            // _this.gridOptions.dataSource.data(_this.modelSave);
+            // console.log("item", item);
+            let delIndex = _this.modelSaveAdd.findIndex(x => x.arrNumber == item.arrNumber);
+            _this.modelSaveAdd.splice(delIndex, 1);
+            _this.gridOptions.dataSource.data(_this.modelSaveAdd);
         }
 
         this.addDevice = () => {
-            console.log("model", _this.model);
 
             if (!$scope.deviceForm.$valid) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
+
+
+                let chk = _this.modelSaveAdd.find(e => {
+                    return e.INVENTORY_CODE == _this.model.INVENTORY_CODE
+                })
+
+                if (chk) {
+                    showAlertBox(msgSettings.msgRepeatedlyData, null);
+                } else {
+                    _this.modelSaveAdd.push(_this.model)
+                    _this.gridOptions.dataSource.data(_this.modelSaveAdd);
+                    _this.configInventory = undefined;
+                    _this.config = undefined;
+                    _this.model = {}
+                }
+
 
             }
         }
@@ -151,7 +163,7 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         const getUsers = () => {
             loading.open();
             $http.get(webURL.webApi + "user/getUsersService.php").then((res) => {
-                console.log("res.data", res.data);
+                // console.log("res.data", res.data);
                 _this.Users = res.data
             }).catch((err) => {
                 console.log("Error");
@@ -162,7 +174,7 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
 
         const getInventory = () => {
             $http.get(webURL.webApi + "inventory/getInventoryService.php").then((res) => {
-                console.log("res.data", res.data);
+                // console.log("res.data", res.data);
                 _this.Inventory = res.data
                 loading.close();
             }).catch((err) => {
@@ -173,12 +185,12 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         }
 
 
-        ////////////Auto Complete//////////////////////////////////////
+        ////////////Auto Complete Users//////////////////////////////////////
 
         this.config = {
             isDisabled: false,
             noCache: true,
-            selectedItem: null,
+            selectedItem: undefined,
         };
 
 
@@ -186,8 +198,13 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
 
         this.selectedItem = (item) => {
             if (item) {
+
                 _this.config.selectedItem = item;
                 _this.model.USER_ID = item.ID;
+                _this.model.NAME_TH = item.NAME_TH;
+                _this.model.DEPARTMENT = item.DEPARTMENT;
+                _this.model.ID_Staff = item.EMPLOYEE_CODE;
+
             }
         }
 
@@ -206,7 +223,41 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         }
 
 
-        ////////////END Auto Complete//////////////////////////////////////
+        ////////////END Auto Complete Users//////////////////////////////////////
+
+        ////////////Auto Complete Inventory//////////////////////////////////////
+
+        this.configInventory = {
+            isDisabled: false,
+            noCache: true,
+            selectedItem: undefined,
+        };
+        this.selectedItemInventory = (item) => {
+
+            if (item) {
+                _this.configInventory.selectedItem = item;
+                _this.model.INVENTORY_ID = item.ID;
+                _this.model.INVENTORY_CODE = item.INVENTORY_CODE;
+                _this.model.STATUS = item.STATUS;
+                _this.model.TYPE = item.TYPE;
+                _this.model.CREATE_DATE = item.CREATE_DATE;
+            }
+        }
+        this.querySearchInventory = (query) => {
+            var results = query ? _this.Inventory.filter(this.createFilterFor(query)) : _this.Inventory;
+            return results;
+        }
+        this.createFilterForInventory = (query) => {
+            var lowercaseQuery = angular.copy(query);
+
+            return function filterFn(item) {
+                return ((item.Name).search(new RegExp('(' + lowercaseQuery + ')', 'gi')) != -1);
+            };
+        }
+
+
+        ////////////END Auto Complete Inventory//////////////////////////////////////
+
 
 
     }
