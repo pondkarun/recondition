@@ -17,45 +17,97 @@
 @import "../../base/fix-kendoui.scss";
 // button
 @import "../../component/button/button.scss";
+
+//Inventory
 div#gridSearchInventory[kendo-grid] {
-    table {
-        colgroup {
-            col {
-                @include first-child() {
-                    width: 125px;
-                    @include media("<=1366px") {
-                        width: 125px;
-                    }
-                }
-                &:nth-child(2) {
-                    width: 300px;
-                    @include media("<=1366px") {
-                        width: 300px;
-                    }
-                }
-                &:nth-child(3) {
-                    width: 200px;
-                    @include media("<=1366px") {
-                        width: 200px;
-                    }
-                }
-                @include last-child() {
-                    width: 125px;
-                    @include media("<=1366px") {
-                        width: 125px;
-                    }
-                }
-            }
+  table {
+    colgroup {
+      col {
+        @include first-child() {
+          width: 125px;
         }
-        tbody {
-            tr {
-                td {
-                    word-wrap: break-word;
-                    @include first-child() {
-                        text-align: left;
-                    }
-                }
-            }
+        &:nth-child(2) {
+          width: 125px;
         }
+        &:nth-child(3) {
+          width: 125px;
+        }
+        &:nth-child(4) {
+          width: 300px;
+        }
+        &:nth-child(5) {
+          width: 125px;
+        }
+        &:nth-child(6) {
+          width: 125px;
+        }
+        &:nth-child(7) {
+          width: 125px;
+        }
+        &:nth-child(8) {
+          width: 200px;
+        }
+        @include last-child() {
+          width: 125px;
+        }
+      }
     }
+    tbody {
+      tr {
+        td {
+          word-wrap: break-word;
+          @include first-child() {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+//Device
+div#gridSearchDevice[kendo-grid] {
+  table {
+    colgroup {
+      col {
+        @include first-child() {
+          width: 125px;
+        }
+        &:nth-child(2) {
+          width: 125px;
+        }
+        &:nth-child(3) {
+          width: 125px;
+        }
+        &:nth-child(4) {
+          width: 300px;
+        }
+        &:nth-child(5) {
+          width: 125px;
+        }
+        &:nth-child(6) {
+          width: 125px;
+        }
+        &:nth-child(7) {
+          width: 125px;
+        }
+        &:nth-child(8) {
+          width: 300px;
+        }
+        @include last-child() {
+          width: 125px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          word-wrap: break-word;
+          @include first-child() {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
 }
