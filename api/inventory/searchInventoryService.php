@@ -13,6 +13,7 @@ $postRequest = json_decode($input);
 @$TYPE_ID = $postRequest->TYPE_ID;
 @$MODEL = $postRequest->MODEL;
 @$SERIAL = $postRequest->SERIAL;
+@$STATUS = $postRequest->STATUS;
 
 
 $data = array();
@@ -30,7 +31,7 @@ try {
     i.DisposedDate,
     i.STATUS
     FROM inventory AS i
-    INNER JOIN data_topics AS d ON d.ID = i.TYPE_ID Where  1";
+    INNER JOIN data_topics AS d ON d.ID = i.TYPE_ID Where 1";
     if ($INVENTORY_CODE) {
         $query .= " AND (i.INVENTORY_CODE like '%" . $INVENTORY_CODE . "%') ";
     }
@@ -46,6 +47,10 @@ try {
     if ($SERIAL) {
         $query .= " AND (i.SERIAL like '%" . $SERIAL . "%') ";
     }
+    if ($STATUS && $STATUS != "all") {
+        $query .= " AND (i.STATUS like '" . $STATUS . "') ";
+    }
+
 
     $query .= " ORDER BY i.INVENTORY_CODE ASC ";
 

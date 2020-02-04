@@ -22,7 +22,7 @@
                             <input name="ID" ng-model="ctrl.modelSearch.INVENTORY_CODE">
                         </md-input-container>
 
-                        <md-input-container flex="15">
+                        <md-input-container flex="10">
                             <label>Type</label>
                             <md-select name="type" ng-model="ctrl.modelSearch.TYPE_ID">
                                 <span ng-repeat="x in listType">
@@ -34,20 +34,29 @@
 
                         </md-input-container>
 
-                        <md-input-container flex="20">
+                        <md-input-container flex="14">
                             <label>BRAND</label>
                             <input name="BRAND" ng-model="ctrl.modelSearch.BRAND">
                         </md-input-container>
 
-                        <md-input-container flex="20">
+                        <md-input-container flex="14">
                             <label>Model</label>
                             <input name="Model" ng-model="ctrl.modelSearch.MODEL">
 
                         </md-input-container>
 
-                        <md-input-container flex="15">
+                        <md-input-container flex="14">
                             <label>Serial</label>
                             <input name="clientName" ng-model="ctrl.modelSearch.SERIAL">
+                        </md-input-container>
+
+                        <md-input-container flex="15">
+                            <label>Status</label>
+                            <md-select name="type" ng-model="ctrl.modelSearch.STATUS">
+                                <md-option value="all">ทั้งหมด</md-option>
+                                <md-option value="ใช้งาน">ใช้งาน</md-option>
+                                <md-option value="หมดอายุการใช้งาน">หมดอายุการใช้งาน</md-option>
+                            </md-select>
                         </md-input-container>
 
                         <md-input-container flex="" class="pl-3">

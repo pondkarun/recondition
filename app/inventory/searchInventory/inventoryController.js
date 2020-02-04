@@ -8,7 +8,8 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             BRAND: null,
             TYPE_ID: null,
             MODEL: null,
-            SERIAL: null
+            SERIAL: null,
+            STATUS: "all"
         };
         _this.ID = userService.getID();
 
@@ -140,7 +141,8 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                 BRAND: null,
                 TYPE_ID: null,
                 MODEL: null,
-                SERIAL: null
+                SERIAL: null,
+                STATUS: "all"
             };
             _this.searchInventory();
         }
