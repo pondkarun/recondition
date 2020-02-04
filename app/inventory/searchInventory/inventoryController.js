@@ -1,7 +1,7 @@
 'use strict'
 
 app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
             INVENTORY_CODE: null,
@@ -13,7 +13,7 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
         };
         _this.ID = userService.getID();
 
-        this.init = function () {
+        this.init = function() {
             getTypeInventory();
             _this.searchInventory();
         }
@@ -24,67 +24,67 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             sortable: true,
             pageable: true,
             columns: [{
-                field: "INVENTORY_CODE",
-                title: "ID",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                    field: "INVENTORY_CODE",
+                    title: "ID",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "TYPE",
-                title: "Type",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "TYPE",
+                    title: "Type",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "BRAND",
-                title: "Brand",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "BRAND",
+                    title: "Brand",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "MODEL",
-                title: "Model",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "MODEL",
+                    title: "Model",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "SERIAL",
-                title: "Serial",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "SERIAL",
+                    title: "Serial",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "PurchaseDate",
-                title: "Purchase Date",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "PurchaseDate",
+                    title: "Purchase Date",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "DisposedDate",
-                title: "Disposed Date",
-                attributes: {
-                    class: "text-center"
+                {
+                    field: "DisposedDate",
+                    title: "Disposed Date",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
+                {
+                    field: "STATUS",
+                    title: "Status",
+                    attributes: {
+                        class: "text-center"
+                    }
                 }
-            },
-            {
-                field: "STATUS",
-                title: "Status",
-                attributes: {
-                    class: "text-center"
-                }
-            }
             ],
             management: true,
             operation: {
@@ -119,6 +119,7 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
 
                 res.data.filter((e) => {
                     e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
+                    e.STATUS = (e.STATUS == 'ใช้งาน') ? "Active" : "Terminate";
                     if (e.DisposedDate && e.DisposedDate != "0000-00-00") {
                         e.DisposedDate = commonService.formatDate(e.DisposedDate)
                     } else {

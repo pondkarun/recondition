@@ -10,52 +10,54 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
 
-                    <section ng-if="typeAdd">
-                        <form name="projectForm" class="container" novalidate>
-                            <div layout="row">
 
-                                <md-input-container class="col-md-5 ">
-                                    <label>Brand</label>
-                                    <input name="Brand" ng-model="model.BRAND" ng-required="true" autocomplete="off">
-                                </md-input-container>
+                    <form name="deviceForm" class="container" novalidate>
+                        <div layout="row" ng-if="typeAdd">
 
-                                <md-input-container class="col-md-5 ">
-                                    <label>Brand</label>
-                                    <input name="Brand" ng-model="model.BRAND" ng-required="true" autocomplete="off">
-                                </md-input-container>
+                            <md-autocomplete class="col-md-5 " flex="100" ng-required="true" md-no-cache="ctrl.config.noCache" md-selected-item="ctrl.config.selectedItem" md-search-text="ctrl.config.searchText" md-selected-item-change="ctrl.selectedItem(item)" md-items="item in ctrl.querySearch(ctrl.config.searchText)"
+                                md-item-text="item.Name" md-min-length="0" md-input-name="Name" md-floating-label="User">
 
-                                <md-input-container class="pl-3 col-md-2 " ng-if="typeAdd">
-                                    <button type="submit"
-                                        class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
-                                        ng-click="ctrl.addDevice()">
+
+                                <md-item-template>
+                                    <span md-highlight-text="ctrl.config.searchText" md-highlight-flags="^i">{{item.Name}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    ไม่พบข้อมูลที่ตรงกับ "{{ctrl.configPURCHASE_CHAIRMAN_BORADAutoComplete.searchText}}"
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <md-input-container class="col-md-5 ">
+                                <label>Brand</label>
+                                <input name="Brand" ng-model="ctrl.model.BRAND" ng-required="true" autocomplete="off">
+                            </md-input-container>
+
+                            <md-input-container class="pl-3 col-md-2 " ng-if="typeAdd">
+                                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.addDevice()">
                                         <i class="fas fa-plus fa-sm text-white-50"></i> Add Device
                                     </button>
-                                </md-input-container>
-                            </div>
-                        </form>
+                            </md-input-container>
+                        </div>
+                    </form>
 
-                        <section class="pt-3">
-                            <div class="pb-5">
-                                <grid-search flex="100" g-option="ctrl.gridOptions"
-                                    on-callback-del="ctrl.gridCallbackDel">
-                                </grid-search>
-                            </div>
+                    <section class="pt-3" ng-if="typeAdd">
+                        <div class="pb-5">
+                            <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-del="ctrl.gridCallbackDel">
+                            </grid-search>
+                        </div>
 
-                            <div class="footer-form-button pt-5" layout="row" layout-align="center center">
+                        <div class="footer-form-button pt-5" layout="row" layout-align="center center">
 
-                                <md-button type="submit" class="md-raised md-primary" layout="row"
-                                    layout-align="center center" ng-click="ctrl.saveForm()">
-                                    Save
-                                </md-button>
+                            <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="ctrl.saveFormAdd()">
+                                Save
+                            </md-button>
 
-                                <md-button type="button" class="md-raised md-secondary" layout="row"
-                                    layout-align="center center" ng-click="ctrl.cancelForm()">
-                                    Cancel
-                                </md-button>
-                            </div>
+                            <md-button type="button" class="md-raised md-secondary" layout="row" layout-align="center center" ng-click="ctrl.cancelForm()">
+                                Cancel
+                            </md-button>
+                        </div>
 
-                        </section>
                     </section>
+
                 </div>
             </div>
         </div>

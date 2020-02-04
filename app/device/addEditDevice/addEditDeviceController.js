@@ -1,16 +1,22 @@
 'use strict'
 
 app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
-        this.modelSave = [];
-        $scope.listType = [];
-        $scope.model = {};
-        this.typePage = {}
+        this.modelSaveAdd = [];
+        this.model = {};
+        this.typePage = {};
+        this.Inventory = [];
+        this.Users = [];
 
 
-        this.init = function () {
+
+        this.init = function() {
             checkRouteParams()
+            if ($scope.typeAdd) {
+                getUsers();
+                getInventory();
+            }
         }
 
         this.gridOptions = {
@@ -94,7 +100,9 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         }
 
         this.addDevice = () => {
-            if (!$scope.projectForm.$valid) {
+            console.log("model", _this.model);
+
+            if (!$scope.deviceForm.$valid) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
 
@@ -104,22 +112,22 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
             $location.path("device");
         }
 
-        this.saveForm = () => {
-            console.log("modelSave", _this.modelSave);
-            if (_this.modelSave.length <= 0) {
-                showAlertBox(msgSettings.msgValidForm, null);
-            } else {
+        this.saveFormAdd = () => {
+            console.log("modelSaveAdd", _this.modelSaveAdd);
+            // if (_this.modelSaveAdd.length <= 0) {
+            //     showAlertBox(msgSettings.msgValidForm, null);
+            // } else {
 
-                // $http.post(webURL.webApi + "inventory/addInventoryService.php", _this.modelSave).then((res) => {
-                //     // console.log("res.data", res.data);
-                //     showAlertBox(msgSettings.msgSaveSucc, null);
-                // }).catch((err) => {
-                //     showAlertBox(msgSettings.msgNotSave, null);
-                // }).finally(() => {
-                //     $location.path("inventory");
-                // });
+            //     // $http.post(webURL.webApi + "inventory/addInventoryService.php", _this.modelSaveAdd).then((res) => {
+            //     //     // console.log("res.data", res.data);
+            //     //     showAlertBox(msgSettings.msgSaveSucc, null);
+            //     // }).catch((err) => {
+            //     //     showAlertBox(msgSettings.msgNotSave, null);
+            //     // }).finally(() => {
+            //     //     $location.path("inventory");
+            //     // });
 
-            }
+            // }
         }
 
 
@@ -137,17 +145,14 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
                 getInventoryEdit(_this.typePage.ID);
             } else {
                 $scope.typeAdd = true;
-                $scope.model.PurchaseDate = new Date();
-                $scope.model.STATUS = "ใช้งาน";
             }
         }
 
-        const getUser = () => {
+        const getUsers = () => {
             loading.open();
-            $http.get(webURL.webApi + "inventory/getTypeInventoryService.php").then((res) => {
-                // console.log("res.data", res.data);
-                loading.close();
-                $scope.listType = res.data
+            $http.get(webURL.webApi + "user/getUsersService.php").then((res) => {
+                console.log("res.data", res.data);
+                _this.Users = res.data
             }).catch((err) => {
                 console.log("Error");
                 loading.close();
@@ -156,11 +161,10 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         }
 
         const getInventory = () => {
-            loading.open();
-            $http.get(webURL.webApi + "inventory/getTypeInventoryService.php").then((res) => {
-                // console.log("res.data", res.data);
+            $http.get(webURL.webApi + "inventory/getInventoryService.php").then((res) => {
+                console.log("res.data", res.data);
+                _this.Inventory = res.data
                 loading.close();
-                $scope.listType = res.data
             }).catch((err) => {
                 console.log("Error");
                 loading.close();
@@ -169,7 +173,40 @@ app.controller("addEditDeviceController", ['$scope', '$rootScope', '$location', 
         }
 
 
+        ////////////Auto Complete//////////////////////////////////////
 
+        this.config = {
+            isDisabled: false,
+            noCache: true,
+            selectedItem: null,
+        };
+
+
+
+
+        this.selectedItem = (item) => {
+            if (item) {
+                _this.config.selectedItem = item;
+                _this.model.USER_ID = item.ID;
+            }
+        }
+
+
+
+        this.querySearch = (query) => {
+            var results = query ? _this.Users.filter(this.createFilterFor(query)) : _this.Users;
+            return results;
+        }
+        this.createFilterFor = (query) => {
+            var lowercaseQuery = angular.copy(query);
+
+            return function filterFn(item) {
+                return ((item.Name).search(new RegExp('(' + lowercaseQuery + ')', 'gi')) != -1);
+            };
+        }
+
+
+        ////////////END Auto Complete//////////////////////////////////////
 
 
     }

@@ -18,7 +18,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
         }
 
         this.gridOptions = {
-            gridID: 'gridSearchInventory',
+            gridID: 'gridSearchDevice',
             dataSource: new kendo.data.DataSource({ data: [], pageSize: 10 }),
             sortable: true,
             pageable: true,
@@ -39,47 +39,40 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
                 },
 
                 {
-                    field: "BRAND",
-                    title: "Brand",
+                    field: "NAME",
+                    title: "Name",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "MODEL",
-                    title: "Model",
+                    field: "DEPARTMENT",
+                    title: "Department",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "SERIAL",
-                    title: "Serial",
+                    field: "ID_Staff",
+                    title: "ID Staff",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "PurchaseDate",
-                    title: "Purchase Date",
+                    field: "CREATE_DATE",
+                    title: "Create Date",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "DisposedDate",
+                    field: "EXPIRED_DATE",
                     title: "Disposed Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-                {
-                    field: "STATUS",
-                    title: "Status",
                     attributes: {
                         class: "text-center"
                     }
