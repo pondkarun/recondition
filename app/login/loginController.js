@@ -1,14 +1,14 @@
 'use strict'
 
 app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
 
         $scope.model = {
             USERNAME: null,
             PASSWORD: null
         }
 
-        this.init = function() {
+        this.init = function () {
             // var callback = (res) => {
             //     $('.k-window').css("visibility", "visible");
             //     $('.k-overlay').css("display", "block");
@@ -35,7 +35,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$routeP
                     showAlertBox('invalid login');
                 }
             }).catch((err) => {
-
+                $scope.model.PASSWORD = null
             }).finally(() => {
                 loading.close();
             });
