@@ -10,8 +10,8 @@ try {
     $query = "SELECT 
     e.ID,
     e.EMPLOYEE_CODE,
-    CONCAT(e.EMPLOYEE_CODE , ' - ' , (SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TM  , ' ' ,  e.SURNAME_TH) AS Name,
-    CONCAT((SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TM  , ' ' ,  e.SURNAME_TH) AS NAME_TH,
+    CONCAT(e.EMPLOYEE_CODE , ' - ' , (SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TH  , ' ' ,  e.SURNAME_TH) AS Name,
+    CONCAT((SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TH  , ' ' ,  e.SURNAME_TH) AS NAME_TH,
     e.PASSWORD,
     e.SURNAME_TH,
     e.DEPARTMENT,

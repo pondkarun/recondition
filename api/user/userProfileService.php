@@ -11,7 +11,7 @@ try {
     $sql = "SELECT 
     e.EMPLOYEE_CODE,
     (SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) AS PREFIX,
-    e.NAME_TM,
+    e.NAME_TH,
     e.PASSWORD,
     e.SURNAME_TH,
     e.DEPARTMENT,
@@ -29,7 +29,7 @@ try {
         $row = mysqli_fetch_array($result);
         $response['EMPLOYEE_CODE'] = $row["EMPLOYEE_CODE"];
         $response['PASSWORD_OLD'] = $row["PASSWORD"];
-        $response['NAME'] = $row["PREFIX"] . $row["NAME_TM"] . " " . $row["SURNAME_TH"];
+        $response['NAME'] = $row["PREFIX"] . $row["NAME_TH"] . " " . $row["SURNAME_TH"];
         $response['DEPARTMENT'] = $row["DEPARTMENT"];
         $response['LOCATION'] = $row["LOCATION"];
         $response['EMAIL'] = $row["EMAIL"];;
