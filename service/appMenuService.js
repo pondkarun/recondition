@@ -121,7 +121,7 @@ app.config(function($routeProvider, $mdDateLocaleProvider) {
                 }
             },
         },
-    }).when("/device/:type/:ID", {
+    }).when("/device/add/:ID", {
         templateUrl: "app/device/addEditDevice/template/addEditDevice.html",
         controller: "addEditDeviceController",
         resolve: {

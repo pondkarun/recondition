@@ -14,7 +14,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
 
         this.init = function() {
             getTypeInventory();
-            _this.searchInventory();
+            _this.searchDevice();
         }
 
         this.gridOptions = {
@@ -39,7 +39,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
                 },
 
                 {
-                    field: "NAME",
+                    field: "Name",
                     title: "Name",
                     attributes: {
                         class: "text-center"
@@ -55,7 +55,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
                 },
 
                 {
-                    field: "ID_Staff",
+                    field: "EMPLOYEE_CODE",
                     title: "ID Staff",
                     attributes: {
                         class: "text-center"
@@ -88,7 +88,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
         };
         this.gridCallbackEdit = (item) => {
             // console.log("item", item);
-            $location.path("inventory" + "/edit/" + item.ID);
+            $location.path("device" + "/edit/" + item.ID);
         }
         this.addDevice = () => {
             $location.path("device" + "/add/" + 0);
@@ -103,10 +103,10 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
             })
         }
 
-        this.searchInventory = () => {
+        this.searchDevice = () => {
             // console.log("modelSearch", _this.modelSearch);
             loading.open();
-            $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {
+            $http.post(webURL.webApi + "device/searchDeviceService.php", _this.modelSearch).then((res) => {
                 // console.log("res.data", res.data);
 
                 res.data.filter((e) => {
@@ -135,7 +135,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
                 MODEL: null,
                 SERIAL: null
             };
-            _this.searchInventory();
+            _this.searchDevice();
         }
 
         function showAlertBox(msg, callback) {
