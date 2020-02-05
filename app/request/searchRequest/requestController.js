@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
+app.controller("requestController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
     function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
@@ -14,17 +14,16 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
         _this.ID = userService.getID();
 
         this.init = function() {
-            getTypeInventory();
-            _this.searchInventory();
+            _this.searchrRequest()
         }
 
         this.gridOptions = {
-            gridID: 'gridSearchInventory',
+            gridID: 'gridSearchRequest',
             dataSource: new kendo.data.DataSource({ data: [], pageSize: 10 }),
             sortable: true,
             pageable: true,
             columns: [{
-                    field: "INVENTORY_CODE",
+                    field: "SERVICES_CODE",
                     title: "ID",
                     attributes: {
                         class: "text-center"
@@ -32,52 +31,45 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                 },
 
                 {
-                    field: "TYPE",
-                    title: "Type",
+                    field: "NAME_TH",
+                    title: "ผู้แจ้ง",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "BRAND",
-                    title: "Brand",
+                    field: "DEPARTMENT",
+                    title: "Department",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "MODEL",
-                    title: "Model",
+                    field: "EMAIL",
+                    title: "E-Mail",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "SERIAL",
-                    title: "Serial",
+                    field: "LOCATION",
+                    title: "Location",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
                 {
-                    field: "PurchaseDate",
-                    title: "Purchase Date",
+                    field: "START_DATE",
+                    title: "Create Date",
                     attributes: {
                         class: "text-center"
                     }
                 },
 
-                {
-                    field: "DisposedDate",
-                    title: "Disposed Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
                 {
                     field: "STATUS",
                     title: "Status",
@@ -88,9 +80,9 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             ],
             management: true,
             operation: {
-                view: false,
+                view: true,
                 del: false,
-                edit: true
+                edit: false
             },
             showIndex: false,
         };
@@ -102,16 +94,9 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
             $location.path("inventory" + "/add/" + 0);
         }
 
-        const getTypeInventory = () => {
-            $http.get(webURL.webApi + "inventory/getTypeInventoryService.php").then((res) => {
-                $scope.listType = res.data
-            }).catch((err) => {
-                console.log("Error");
-                showAlertBox(msgSettings.msgErrorApi, null);
-            })
-        }
 
-        this.searchInventory = () => {
+
+        this.searchrRequest = () => {
             // console.log("modelSearch", _this.modelSearch);
             loading.open();
             $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {

@@ -2573,6 +2573,37 @@ div#gridSearchDevice[kendo-grid] table tbody tr td:first-of-type {
   text-align: left;
 }
 
+div#gridSearchRequest[kendo-grid] table colgroup col:first-of-type {
+  width: 125px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(2) {
+  width: 300px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(3) {
+  width: 175px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(4) {
+  width: 200px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(5) {
+  width: 150px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(6) {
+  width: 150px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(7) {
+  width: 150px;
+}
+div#gridSearchRequest[kendo-grid] table colgroup col:last-of-type {
+  width: 125px;
+}
+div#gridSearchRequest[kendo-grid] table tbody tr td {
+  word-wrap: break-word;
+}
+div#gridSearchRequest[kendo-grid] table tbody tr td:first-of-type {
+  text-align: left;
+}
+
 .bg-login-image {
   background: url("../images/ctiLogo.png");
   background-position: center;
