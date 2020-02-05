@@ -81,14 +81,33 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
             management: true,
             operation: {
                 view: false,
-                del: false,
-                edit: true
+                del: true,
+                edit: false
             },
             showIndex: false,
         };
-        this.gridCallbackEdit = (item) => {
-            // console.log("item", item);
-            $location.path("device" + "/edit/" + item.ID);
+        this.gridCallbackDel = (item) => {
+
+            var callback = () => {
+                let dateNow = commonService.formatDatDB(new Date());
+                let model = {
+                    ID: item.ID,
+                    EXPIRED_DATE: dateNow
+                }
+                console.log("model", model);
+                loading.open();
+                $http.post(webURL.webApi + "device/delDeviceService.php", model).then((res) => {
+                    //console.log("res.data", res.data);
+                    // showAlertBox(msgSettings.msgSaveSucc, null);
+                }).catch((err) => {
+                    loading.close();
+                    showAlertBox(msgSettings.msgNotSave, null);
+                }).finally(() => {
+                    loading.close();
+                    _this.searchDevice()
+                });
+            }
+            showConfirmBox(msgSettings.msgDelConfirm, callback, undefined);
         }
         this.addDevice = () => {
             $location.path("device" + "/add/" + 0);
@@ -111,6 +130,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
 
                 res.data.filter((e) => {
                     e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
+                    e.STATUS = (e.STATUS == 'ใช้งาน') ? "Active" : "Inactive";
                     if (e.DisposedDate && e.DisposedDate != "0000-00-00") {
                         e.DisposedDate = commonService.formatDate(e.DisposedDate)
                     } else {
@@ -138,13 +158,21 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
             _this.searchDevice();
         }
 
+        //************dialog func***************//
+
         function showAlertBox(msg, callback) {
             var dialog = customDialog.defaultObj();
             dialog.content = msg;
             customDialog.alert(callback, dialog);
         }
 
+        function showConfirmBox(msg, okCallback, cancelCallback) {
+            var dialog = customDialog.defaultObj();
+            dialog.content = msg;
+            customDialog.confirm(okCallback, cancelCallback, dialog);
+        }
 
+        //************end dialog func***************//
     }
 
 ]);
