@@ -6,7 +6,8 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
         this.init = () => {
             $rootScope.getMenu();
         }
-
+        $scope.states = {};
+        $scope.states.activeItem = 'account';
         $scope.showMenu = () => {
             if (!userService.isUserLoggedIn()) {
                 localStorage.removeItem("login");
@@ -16,7 +17,8 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
         }
 
         $scope.routep = (item) => {
-            // console.log("item", item);
+            console.log("item", item);
+            $scope.states.activeItem = item
             $location.path(item);
         }
 

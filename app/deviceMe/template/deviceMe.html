@@ -12,18 +12,16 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="container">
-                        <v-accordion id="accordionB" class="vAccordion--default" control="accordionA"
-                            onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
+                        <v-accordion id="accordionB" class="vAccordion--default" control="accordionA" onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
 
                             <!-- add expanded attribute to open the section -->
-                            <v-pane class="v-pane-class" id="{{ ::pane.id }}" ng-repeat="pane in panesA"
-                                expanded="pane.isExpanded" ng-click="accordionA.toggle(index)">
-                                <v-pane-header id="{{ ::pane.id }}-header" aria-controls="{{ ::pane.id }}-content">
-                                    <h5>{{ ::pane.header }}</h5>
+                            <v-pane class="v-pane-class" id="{{ ::x.id }}" ng-repeat="x in ctrl.listType" expanded="x.isExpanded" ng-click="accordionA.toggle(index)">
+                                <v-pane-header id="{{ ::x.id }}-header" aria-controls="{{ ::x.id }}-content">
+                                    <h5>{{ ::x.header }}</h5>
                                 </v-pane-header>
 
-                                <v-pane-content id="{{ ::pane.id }}-content" aria-labelledby="{{ ::pane.id }}-header">
-                                    <p>{{ ::pane.content }}</p>
+                                <v-pane-content id="{{ ::x.id }}-content" aria-labelledby="{{ ::x.id }}-header">
+                                    <h6 class="pl-4" ng-repeat="y in x.content"> o <b>Brand :</b> {{ ::y.BRAND }} , <b>Model :</b> {{ ::y.MODEL }} , <b>Serial :</b> {{ ::y.SERIAL }} </h6>
                                 </v-pane-content>
                             </v-pane>
                         </v-accordion>
