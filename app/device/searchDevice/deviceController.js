@@ -1,18 +1,18 @@
 'use strict'
 
 app.controller("deviceController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
             INVENTORY_CODE: null,
-            BRAND: null,
             TYPE_ID: null,
-            MODEL: null,
-            SERIAL: null
+            Name: null,
+            EMPLOYEE_CODE: null,
+            STATUS: "ใช้งาน"
         };
         _this.ID = userService.getID();
 
-        this.init = function() {
+        this.init = function () {
             getTypeInventory();
             _this.searchDevice();
         }
@@ -23,60 +23,60 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
             sortable: true,
             pageable: true,
             columns: [{
-                    field: "INVENTORY_CODE",
-                    title: "ID",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "TYPE",
-                    title: "Type",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "Name",
-                    title: "Name",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "DEPARTMENT",
-                    title: "Department",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "EMPLOYEE_CODE",
-                    title: "ID Staff",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "CREATE_DATE",
-                    title: "Create Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "STATUS",
-                    title: "Status",
-                    attributes: {
-                        class: "text-center"
-                    }
+                field: "INVENTORY_CODE",
+                title: "ID",
+                attributes: {
+                    class: "text-center"
                 }
+            },
+
+            {
+                field: "TYPE",
+                title: "Type",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "Name",
+                title: "Name",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "DEPARTMENT",
+                title: "Department",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "EMPLOYEE_CODE",
+                title: "ID Staff",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "CREATE_DATE",
+                title: "Create Date",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "STATUS",
+                title: "Status",
+                attributes: {
+                    class: "text-center"
+                }
+            }
             ],
             management: true,
             operation: {
@@ -123,7 +123,7 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
         }
 
         this.searchDevice = () => {
-            // console.log("modelSearch", _this.modelSearch);
+            console.log("modelSearch", _this.modelSearch);
             loading.open();
             $http.post(webURL.webApi + "device/searchDeviceService.php", _this.modelSearch).then((res) => {
                 // console.log("res.data", res.data);
@@ -147,13 +147,13 @@ app.controller("deviceController", ['$scope', '$rootScope', '$location', '$route
             })
         }
 
-        this.clearInventory = () => {
-            _this.modelSearch = {
+        this.clearDevice = () => {
+            this.modelSearch = {
                 INVENTORY_CODE: null,
-                BRAND: null,
                 TYPE_ID: null,
-                MODEL: null,
-                SERIAL: null
+                Name: null,
+                EMPLOYEE_CODE: null,
+                STATUS: "ใช้งาน"
             };
             _this.searchDevice();
         }

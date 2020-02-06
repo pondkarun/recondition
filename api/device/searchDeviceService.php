@@ -9,47 +9,52 @@ $input = file_get_contents("php://input");
 $postRequest = json_decode($input);
 
 @$INVENTORY_CODE = $postRequest->INVENTORY_CODE;
-@$BRAND = $postRequest->BRAND;
+@$Name = $postRequest->Name;
 @$TYPE_ID = $postRequest->TYPE_ID;
-@$MODEL = $postRequest->MODEL;
-@$SERIAL = $postRequest->SERIAL;
+@$EMPLOYEE_CODE = $postRequest->EMPLOYEE_CODE;
 @$STATUS = $postRequest->STATUS;
+
 
 
 $data = array();
 
 try {
 
+    //     SELECT 
+    // CONCAT(d.DATA_TOPICS , em.NAME_TH , ' ' , em.SURNAME_TH) AS NAME
+    // FROM `employees` AS em 
+    // LEFT JOIN data_topics AS d ON em.PREFIX_ID = d.ID
+    // WHERE CONCAT(d.DATA_TOPICS , em.NAME_TH , ' ' , em.SURNAME_TH) LIKE '%บริบูรณธนา%'
+
     $query = "SELECT 
     eq.ID,
     i.INVENTORY_CODE,
     i.TYPE_ID,
     (SELECT data_topics FROM data_topics WHERE ID = i.TYPE_ID) AS TYPE,
-    CONCAT( (SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TH  , ' ' ,  e.SURNAME_TH) AS Name,
+    CONCAT((SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TH  , ' ' ,  e.SURNAME_TH) AS Name,
     e.DEPARTMENT,
     e.EMPLOYEE_CODE,
     eq.CREATE_DATE,
     eq.STATUS
     FROM equipments AS eq 
     INNER JOIN employees AS e ON eq.USER_ID = e.ID
-    INNER JOIN inventory AS i ON eq.INVENTORY_ID = i.ID Where 1";
+    INNER JOIN inventory AS i ON eq.INVENTORY_ID = i.ID 
+    LEFT JOIN data_topics AS d ON e.PREFIX_ID = d.ID
+    Where 1";
     if ($INVENTORY_CODE) {
         $query .= " AND (i.INVENTORY_CODE like '%" . $INVENTORY_CODE . "%') ";
     }
-    if ($BRAND) {
-        $query .= " AND (i.BRAND like '%" . $BRAND . "%') ";
+    if ($Name) {
+        $query .= " AND (CONCAT(d.DATA_TOPICS , e.NAME_TH , ' ' , e.SURNAME_TH) LIKE  '%" . $Name . "%') ";
+    }
+    if ($EMPLOYEE_CODE) {
+        $query .= " AND (e.EMPLOYEE_CODE like '%" . $EMPLOYEE_CODE . "%') ";
     }
     if ($TYPE_ID) {
         $query .= " AND (i.TYPE_ID like '" . $TYPE_ID . "') ";
     }
-    if ($MODEL) {
-        $query .= " AND (i.MODEL like '%" . $MODEL . "%') ";
-    }
-    if ($SERIAL) {
-        $query .= " AND (i.SERIAL like '%" . $SERIAL . "%') ";
-    }
     if ($STATUS && $STATUS != "all") {
-        $query .= " AND (i.STATUS like '" . $STATUS . "') ";
+        $query .= " AND (eq.STATUS like '" . $STATUS . "') ";
     }
 
 
