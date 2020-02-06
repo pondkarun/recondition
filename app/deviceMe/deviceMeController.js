@@ -7,7 +7,9 @@ app.controller("deviceMeController", ['$scope', '$rootScope', '$location', '$rou
         _this.ID = userService.getID();
 
         this.init = function () {
-            getUserProfile(_this.ID)
+            // getUserProfile(_this.ID)
+            test()
+
         }
 
         const getUserProfile = (ID) => {
@@ -26,6 +28,28 @@ app.controller("deviceMeController", ['$scope', '$rootScope', '$location', '$rou
                 console.log("Error");
                 showAlertBox(msgSettings.msgErrorApi, null);
             })
+
+        }
+        const test = () => {
+            $scope.panesA = [{
+                id: 'pane-1a',
+                header: 'Pane 1',
+                content: 'No No',
+                isExpanded: false
+            }, {
+                id: 'pane-2a',
+                header: 'Pane 2',
+                content: 'Ya Ya',
+                isExpanded: false
+            }, {
+                id: 'pane-2c',
+                header: 'Pane 3',
+                content: 'WAT?',
+                isExpanded: false
+            }];
+
+
+
         }
 
 

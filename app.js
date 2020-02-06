@@ -1,6 +1,6 @@
 ﻿'use strict'
 
-var app = angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngRoute', 'kendo.directives']);
+var app = angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngRoute', 'kendo.directives', 'vAccordion', 'ngAnimate']);
 var loading = new loadingTopJS();
 
 var webURL = {

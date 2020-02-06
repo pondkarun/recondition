@@ -12,95 +12,21 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="container">
-                        <md-content layout-padding>
-                            <div>
-                                <form name="userForm" novalidate>
+                        <v-accordion id="accordionB" class="vAccordion--default" control="accordionA"
+                            onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
 
-                                    <div layout-gt-xs="row">
-                                        <md-input-container class="md-block" flex-gt-xs>
-                                            <label>ID</label>
-                                            <input ng-model="modelSave.EMPLOYEE_CODE" ng-disabled="true">
-                                        </md-input-container>
-                                    </div>
+                            <!-- add expanded attribute to open the section -->
+                            <v-pane class="v-pane-class" id="{{ ::pane.id }}" ng-repeat="pane in panesA"
+                                expanded="pane.isExpanded" ng-click="accordionA.toggle(index)">
+                                <v-pane-header id="{{ ::pane.id }}-header" aria-controls="{{ ::pane.id }}-content">
+                                    <h5>{{ ::pane.header }}</h5>
+                                </v-pane-header>
 
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Name</label>
-                                            <input ng-model="modelSave.NAME" ng-disabled="true">
-                                        </md-input-container>
-
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Department</label>
-                                            <input ng-model="modelSave.DEPARTMENT" ng-disabled="true">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Location</label>
-                                            <input ng-model="modelSave.LOCATION" ng-disabled="true">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>E-Mail</label>
-                                            <input type="email" ng-model="modelSave.EMAIL" ng-disabled="false" required>
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Nickname</label>
-                                            <input ng-model="modelSave.NICKNAME" ng-disabled="false">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>IP Address</label>
-                                            <input ng-model="modelSave.IPAddress" ng-disabled="false">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Tel.</label>
-                                            <input type="call" name="Tel" ng-model="modelSave.TEL" ng-disabled="false"
-                                                autocomplete="off">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Password</label>
-                                            <input type="password" ng-model="modelSave.PASSWORD" ng-disabled="false"
-                                                required>
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>New Password</label>
-                                            <input type="password" ng-model="modelSave.NEW_PASSWORD"
-                                                ng-disabled="false">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                            <label>Confirm Password</label>
-                                            <input type="password" ng-model="modelSave.CON_PASSWORS" ng-disabled="false"
-                                                ng-required="modelSave.NEW_PASSWORD">
-                                        </md-input-container>
-                                    </div>
-
-
-
-                                </form>
-
-                            </div>
-                        </md-content>
+                                <v-pane-content id="{{ ::pane.id }}-content" aria-labelledby="{{ ::pane.id }}-header">
+                                    <p>{{ ::pane.content }}</p>
+                                </v-pane-content>
+                            </v-pane>
+                        </v-accordion>
                     </div>
                 </div>
             </div>

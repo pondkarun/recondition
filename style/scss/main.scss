@@ -8,8 +8,8 @@
 // use for plugin include-media.scss
 @import "plugin/include-media/include-media.scss";
 // use for plugin z-index-manager.scss
-@import 'plugin/z-index-manager/functions.scss';
-@import 'plugin/z-index-manager/mixins.scss';
+@import "plugin/z-index-manager/functions.scss";
+@import "plugin/z-index-manager/mixins.scss";
 @debug $z-indexes;
 // use for plugin animated.scss
 @import "plugin/animated/animated.scss";
@@ -21,3 +21,4 @@
 @import "component/grid/grid.scss";
 @import "component/login/login.scss";
 @import "component/dialog/dialog.scss";
+@import "component/accordion/accordion.scss";
