@@ -182,8 +182,8 @@ app.config(function ($routeProvider, $mdDateLocaleProvider) {
             },
         },
     }).when("/request/:Type/:ID", {
-        templateUrl: "app/request/addEditRequest/template/addEditRequest.html",
-        controller: "addEditRequestController",
+        templateUrl: "app/request/viewRequest/template/viewRequest.html",
+        controller: "viewRequestController",
         resolve: {
             check: function ($location, userService, $http) {
                 if (!userService.isUserLoggedIn()) {

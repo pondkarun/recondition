@@ -1,6 +1,7 @@
 <div ng-controller="requestController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Request</h1>
+        <button ng-click="test()">test</button>
     </div>
 
     <div class="row">
@@ -38,10 +39,12 @@
                         </md-input-container>
 
                         <md-input-container flex="" class="pl-3">
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchInventory()">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+                                ng-click="ctrl.searchInventory()">
                                 <i class="fas fa-search fa-sm text-white-50"></i> Search
                             </button>
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearInventory()">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm"
+                                ng-click="ctrl.clearInventory()">
                                 <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
                             </button>
                         </md-input-container>

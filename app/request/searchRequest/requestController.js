@@ -1,7 +1,7 @@
 'use strict'
 
 app.controller("requestController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
             INVENTORY_CODE: null,
@@ -13,7 +13,7 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
         };
         _this.ID = userService.getID();
 
-        this.init = function() {
+        this.init = function () {
             _this.searchrRequest()
         }
 
@@ -23,60 +23,60 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
             sortable: true,
             pageable: true,
             columns: [{
-                    field: "SERVICES_CODE",
-                    title: "ID",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "NAME_TH",
-                    title: "ผู้แจ้ง",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "DEPARTMENT",
-                    title: "Department",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "EMAIL",
-                    title: "E-Mail",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "LOCATION",
-                    title: "Location",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "START_DATE",
-                    title: "Create Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "STATUS",
-                    title: "Status",
-                    attributes: {
-                        class: "text-center"
-                    }
+                field: "SERVICES_CODE",
+                title: "ID",
+                attributes: {
+                    class: "text-center"
                 }
+            },
+
+            {
+                field: "NAME_TH",
+                title: "ผู้แจ้ง",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "DEPARTMENT",
+                title: "Department",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "EMAIL",
+                title: "E-Mail",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "LOCATION",
+                title: "Location",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "START_DATE",
+                title: "Create Date",
+                attributes: {
+                    class: "text-center"
+                }
+            },
+
+            {
+                field: "STATUS",
+                title: "Status",
+                attributes: {
+                    class: "text-center"
+                }
+            }
             ],
             management: true,
             operation: {
@@ -86,15 +86,14 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
             },
             showIndex: false,
         };
-        this.gridCallbackEdit = (item) => {
+        this.gridCallbackView = (item) => {
             // console.log("item", item);
-            $location.path("inventory" + "/edit/" + item.ID);
-        }
-        this.addInventory = () => {
-            $location.path("inventory" + "/add/" + 0);
+            $location.path("request" + "/View/" + item.ID);
         }
 
-
+        $scope.test = () => {
+            $location.path("request" + "/View/" + 0);
+        }
 
         this.searchrRequest = () => {
             // console.log("modelSearch", _this.modelSearch);

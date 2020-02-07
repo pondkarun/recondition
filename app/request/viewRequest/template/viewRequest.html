@@ -1,0 +1,75 @@
+<style>
+    md-input-container {
+        margin: 0px 0;
+    }
+</style>
+<div ng-controller="viewRequestController as ctrl" ng-init="ctrl.init()">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">IT Inventory</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <form name="projectForm" class="container" novalidate>
+
+
+                        <div layout="row">
+                            <md-input-container flex="50">
+                                <md-input-container class="md-block">
+                                    <label>ID</label>
+                                    <input type="text" ng-model="model.INVENTORY_CODE" ng-disabled="true">
+                                </md-input-container>
+
+                            </md-input-container>
+
+                            <md-input-container flex="50">
+                                <md-input-container class="md-block">
+
+                                    <md-datepicker ng-model="model.PurchaseDate" class="datepicker" md-open-on-focus
+                                        ng-disabled="true">
+                                    </md-datepicker>
+                                </md-input-container>
+                            </md-input-container>
+                        </div>
+
+                        <md-input-container class="input-container " flex="100" layout="row">
+
+                            <md-radio-group ng-disabled="" ng-model="model.test" flex layout="row">
+                                <md-radio-button value="{{x.ID}}" ng-repeat="x in ctrl.listType"> <span
+                                        class="pl-5">{{x.DATA_TOPICS}}</span>
+                                </md-radio-button>
+                            </md-radio-group>
+
+                        </md-input-container>
+
+
+                        <section>
+
+                            <div class="footer-form-button pt-5" layout="row" layout-align="center center"
+                                ng-if="!typeAdd">
+
+                                <md-button type="submit" class="md-raised md-primary" layout="row"
+                                    layout-align="center center" ng-click="ctrl.saveEditForm()">
+                                    Save
+                                </md-button>
+
+                                <md-button type="button" class="md-raised md-secondary" layout="row"
+                                    layout-align="center center" ng-click="ctrl.cancelForm()">
+                                    Cancel
+                                </md-button>
+                            </div>
+                        </section>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
