@@ -1,20 +1,19 @@
 'use strict'
 
 app.controller("deviceMeController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
         let _this = this;
         this.listType = [];
         this.listInventoryMe = [];
         this.ID = userService.getID();
 
-        this.init = function() {
+        this.init = function () {
             getTypeInventory()
-            test()
         }
 
         const mapDeviceMe = (ID) => {
-            console.log("listType 1", _this.listType);
-            console.log("listInventoryMe", _this.listInventoryMe);
+            // console.log("listType 1", _this.listType);
+            // console.log("listInventoryMe", _this.listInventoryMe);
             _this.listType.filter((e, index) => {
                 let num = index + 1;
                 e.id = 'pane-' + num + 'a';
@@ -30,7 +29,7 @@ app.controller("deviceMeController", ['$scope', '$rootScope', '$location', '$rou
 
             })
 
-            console.log("listType 2", _this.listType);
+            // console.log("listType 2", _this.listType);
         }
 
         const getDeviceMe = (ID) => {
@@ -58,31 +57,7 @@ app.controller("deviceMeController", ['$scope', '$rootScope', '$location', '$rou
                 showAlertBox(msgSettings.msgErrorApi, null);
             })
         }
-        const test = () => {
-            $scope.panesA = [{
-                id: 'pane-1a',
-                header: 'Pane 1',
-                content: [{
-                        Name: "a"
-                    },
 
-                ],
-                isExpanded: false
-            }, {
-                id: 'pane-2a',
-                header: 'Pane 2',
-                content: 'Ya Ya',
-                isExpanded: false
-            }, {
-                id: 'pane-2c',
-                header: 'Pane 3',
-                content: 'WAT?',
-                isExpanded: false
-            }];
-
-
-
-        }
 
 
         function showAlertBox(msg, callback) {
