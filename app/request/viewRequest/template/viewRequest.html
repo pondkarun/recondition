@@ -5,7 +5,7 @@
 </style>
 <div ng-controller="viewRequestController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">IT Inventory</h1>
+        <h1 class="h3 mb-0 text-gray-800">Request</h1>
     </div>
 
     <div class="row">
@@ -36,7 +36,7 @@
                             </md-input-container>
                         </div>
 
-                        <md-input-container class="input-container " flex="100" layout="row">
+                        <md-input-container class="input-container pb-5" flex="100" layout="row">
 
                             <md-radio-group ng-disabled="" ng-model="model.test" flex layout="row">
                                 <md-radio-button value="{{x.ID}}" ng-repeat="x in ctrl.listType"> <span
@@ -44,6 +44,11 @@
                                 </md-radio-button>
                             </md-radio-group>
 
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Biography</label>
+                            <textarea ng-model="user.DETAIL" md-maxlength="150" rows="5" md-select-on-focus></textarea>
                         </md-input-container>
 
 
