@@ -201,6 +201,50 @@ app.config(function($routeProvider, $mdDateLocaleProvider) {
                 }
             },
         },
+    }).when("/service", {
+        templateUrl: "app/service/searchService/template/service.html",
+        controller: "serviceController",
+        resolve: {
+            check: function($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+                    let model = {
+                        ROUTEP: "service",
+                        ID_STATUS_EM: userService.getStatusID()
+                    }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+                }
+            },
+        },
+    }).when("/service/:Type/:ID", {
+        templateUrl: "app/service/addEditService/template/addEditService.html",
+        controller: "addEditServiceController",
+        resolve: {
+            check: function($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+                    if (userService.getStatusID() != "676D96D5C4C54A83BB2C9B657FD02C66") {
+                        $location.path('/account');
+                    } else {
+                        let model = {
+                            ROUTEP: "service",
+                            ID_STATUS_EM: userService.getStatusID()
+                        }
+                        $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                            if (Number(res.data.COUNT_ID) <= 0) {
+                                $location.path('/account');
+                            }
+                        })
+                    }
+                }
+            },
+        },
     }).when("/report", {
         templateUrl: "app/report/searchReport/template/report.html",
         controller: "reportController",
