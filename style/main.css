@@ -2976,3 +2976,10 @@ md-radio-button .md-off {
   width: 28px;
   height: 28px;
 }
+
+md-input-container label {
+  color: black;
+}
+md-input-container.md-input-has-value {
+  color: black;
+}
