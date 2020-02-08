@@ -906,3 +906,31 @@ div#gridSearchRequest[kendo-grid] table tbody tr td {
 div#gridSearchRequest[kendo-grid] table tbody tr td:first-of-type {
   text-align: left;
 }
+
+div#gridSearchReport[kendo-grid] table colgroup col:first-of-type {
+  width: 100px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:nth-child(2) {
+  width: 150px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:nth-child(3) {
+  width: 200px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:nth-child(4) {
+  width: 200px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:nth-child(5) {
+  width: 150px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:nth-child(6) {
+  width: 150px;
+}
+div#gridSearchReport[kendo-grid] table colgroup col:last-of-type {
+  width: 150px;
+}
+div#gridSearchReport[kendo-grid] table tbody tr td {
+  word-wrap: break-word;
+}
+div#gridSearchReport[kendo-grid] table tbody tr td:first-of-type {
+  text-align: left;
+}

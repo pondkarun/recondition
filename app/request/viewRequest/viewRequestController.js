@@ -1,14 +1,14 @@
 'use strict'
 
 app.controller("viewRequestController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSave = {};
         this.listType = [];
 
 
 
-        this.init = function () {
+        this.init = function() {
             _this.typePage = $routeParams;
             getTypeInventory();
             getRequestIT(_this.typePage.ID)
@@ -16,7 +16,7 @@ app.controller("viewRequestController", ['$scope', '$rootScope', '$location', '$
 
 
         this.cancelForm = () => {
-            $location.path("inventory");
+            $location.path("request");
         }
 
         this.saveForm = () => {

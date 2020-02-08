@@ -21,7 +21,7 @@
                             <md-input-container flex="50">
                                 <md-input-container class="md-block">
                                     <label>ID</label>
-                                    <input type="text" ng-model="model.INVENTORY_CODE" ng-disabled="true">
+                                    <input type="text" ng-model="ctrl.modelSave.INVENTORY_CODE" ng-disabled="true">
                                 </md-input-container>
 
                             </md-input-container>
@@ -29,8 +29,7 @@
                             <md-input-container flex="50">
                                 <md-input-container class="md-block">
 
-                                    <md-datepicker ng-model="model.PurchaseDate" class="datepicker" md-open-on-focus
-                                        ng-disabled="true">
+                                    <md-datepicker ng-model="ctrl.modelSave.PurchaseDate" class="datepicker" md-open-on-focus ng-disabled="true">
                                     </md-datepicker>
                                 </md-input-container>
                             </md-input-container>
@@ -38,32 +37,48 @@
 
                         <md-input-container class="input-container pb-5" flex="100" layout="row">
 
-                            <md-radio-group ng-disabled="" ng-model="model.test" flex layout="row">
-                                <md-radio-button value="{{x.ID}}" ng-repeat="x in ctrl.listType"> <span
-                                        class="pl-5">{{x.DATA_TOPICS}}</span>
+                            <md-radio-group ng-disabled="" ng-model="ctrl.modelSave.TYPE_ID" flex layout="row">
+                                <md-radio-button value="{{x.ID}}" ng-repeat="x in ctrl.listType" ng-disabled="true">
+                                    <span class="pl-5">{{x.DATA_TOPICS}}</span>
                                 </md-radio-button>
                             </md-radio-group>
 
                         </md-input-container>
 
                         <md-input-container class="md-block" flex-gt-sm>
-                            <label>Biography</label>
-                            <textarea ng-model="user.DETAIL" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                            <label>Detail</label>
+                            <textarea ng-model="ctrl.modelSave.DETAIL" rows="5" md-select-on-focus ng-disabled="false"></textarea>
                         </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Remark</label>
+                            <textarea ng-model="ctrl.modelSave.REMARK" rows="3" md-select-on-focus ng-disabled="false"></textarea>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Analyze & Repair</label>
+                            <textarea ng-model="ctrl.modelSave.ANALYZE" rows="5" md-select-on-focus ng-disabled="false"></textarea>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex="50" flex-gt-sm>
+                            <label>Status</label>
+                            <md-select name="type" ng-model="ctrl.modelSave.STATUS">
+                                <md-option value="ใช้งาน">Active</md-option>
+                                <md-option value="เลิกใช้งาน">Inactive</md-option>
+                            </md-select>
+                        </md-input-container>
+
 
 
                         <section>
 
-                            <div class="footer-form-button pt-5" layout="row" layout-align="center center"
-                                ng-if="!typeAdd">
+                            <div class="footer-form-button pt-5" layout="row" layout-align="center center" ng-if="!typeAdd">
 
-                                <md-button type="submit" class="md-raised md-primary" layout="row"
-                                    layout-align="center center" ng-click="ctrl.saveEditForm()">
+                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="ctrl.saveForm()">
                                     Save
                                 </md-button>
 
-                                <md-button type="button" class="md-raised md-secondary" layout="row"
-                                    layout-align="center center" ng-click="ctrl.cancelForm()">
+                                <md-button type="button" class="md-raised md-secondary" layout="row" layout-align="center center" ng-click="ctrl.cancelForm()">
                                     Cancel
                                 </md-button>
                             </div>
