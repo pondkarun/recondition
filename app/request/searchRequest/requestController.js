@@ -1,20 +1,43 @@
 'use strict'
 
 app.controller("requestController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
-            INVENTORY_CODE: null,
-            BRAND: null,
-            TYPE_ID: null,
-            MODEL: null,
-            SERIAL: null,
-            STATUS: "all"
+            SERVICES_CODE: null,
+            NAME_TH: null,
+            STATUS: "แจ้งซ้อม"
         };
-        _this.ID = userService.getID();
 
-        this.init = function () {
-            _this.searchrRequest()
+        $scope.listStatus = [{
+                ID: 1,
+                STATUS: "Search All",
+                VALUE: "all"
+            },
+            {
+                ID: 2,
+                STATUS: "แจ้งซ้อม",
+                VALUE: "แจ้งซ้อม"
+            },
+            {
+                ID: 3,
+                STATUS: "รอการอนุมัติของ",
+                VALUE: "รอการอนุมัติของ"
+            },
+            {
+                ID: 4,
+                STATUS: "แก้ไขเรียบร้อย",
+                VALUE: "แก้ไขเรียบร้อย"
+            },
+            {
+                ID: 5,
+                STATUS: "จบงาน",
+                VALUE: "จบงาน"
+            },
+        ]
+
+        this.init = function() {
+            _this.searchRequest()
         }
 
         this.gridOptions = {
@@ -23,60 +46,60 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
             sortable: true,
             pageable: true,
             columns: [{
-                field: "SERVICES_CODE",
-                title: "ID",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                    field: "SERVICES_CODE",
+                    title: "ID",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "NAME_TH",
-                title: "ผู้แจ้ง",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "NAME_TH",
+                    title: "ผู้แจ้ง",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "DEPARTMENT",
-                title: "Department",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "DEPARTMENT",
+                    title: "Department",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "EMAIL",
-                title: "E-Mail",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "EMAIL",
+                    title: "E-Mail",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "LOCATION",
-                title: "Location",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "LOCATION",
+                    title: "Location",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "START_DATE",
-                title: "Create Date",
-                attributes: {
-                    class: "text-center"
-                }
-            },
+                {
+                    field: "CreateDate",
+                    title: "Create Date",
+                    attributes: {
+                        class: "text-center"
+                    }
+                },
 
-            {
-                field: "STATUS",
-                title: "Status",
-                attributes: {
-                    class: "text-center"
+                {
+                    field: "STATUS",
+                    title: "Status",
+                    attributes: {
+                        class: "text-center"
+                    }
                 }
-            }
             ],
             management: true,
             operation: {
@@ -91,26 +114,12 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
             $location.path("request" + "/View/" + item.ID);
         }
 
-        $scope.test = () => {
-            $location.path("request" + "/View/" + 0);
-        }
 
-        this.searchrRequest = () => {
+        this.searchRequest = () => {
             // console.log("modelSearch", _this.modelSearch);
             loading.open();
-            $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {
+            $http.post(webURL.webApi + "request/searchRequestService.php", _this.modelSearch).then((res) => {
                 // console.log("res.data", res.data);
-
-                res.data.filter((e) => {
-                    e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
-                    e.STATUS = (e.STATUS == 'ใช้งาน') ? "Active" : "Terminate";
-                    if (e.DisposedDate && e.DisposedDate != "0000-00-00") {
-                        e.DisposedDate = commonService.formatDate(e.DisposedDate)
-                    } else {
-                        e.DisposedDate = "-"
-                    }
-                })
-
                 _this.gridOptions.dataSource.data(res.data);
                 loading.close();
             }).catch((err) => {
@@ -120,16 +129,13 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
             })
         }
 
-        this.clearInventory = () => {
+        this.clearRequest = () => {
             _this.modelSearch = {
-                INVENTORY_CODE: null,
-                BRAND: null,
-                TYPE_ID: null,
-                MODEL: null,
-                SERIAL: null,
-                STATUS: "all"
+                SERVICES_CODE: null,
+                NAME_TH: null,
+                STATUS: "แจ้งซ้อม"
             };
-            _this.searchInventory();
+            _this.searchRequest();
         }
 
         function showAlertBox(msg, callback) {

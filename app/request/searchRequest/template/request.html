@@ -1,7 +1,6 @@
 <div ng-controller="requestController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Request</h1>
-        <button ng-click="test()">test</button>
     </div>
 
     <div class="row">
@@ -15,36 +14,28 @@
                         <h4 class="pr-3">Search :</h4>
                         <md-input-container flex="10">
                             <label>ID</label>
-                            <input name="ID" ng-model="ctrl.modelSearch.INVENTORY_CODE">
+                            <input name="ID" ng-model="ctrl.modelSearch.SERVICES_CODE">
                         </md-input-container>
 
                         <md-input-container flex="20">
                             <label>Name</label>
-                            <input name="BRAND" ng-model="ctrl.modelSearch.Name">
+                            <input name="BRAND" ng-model="ctrl.modelSearch.NAME_TH">
                         </md-input-container>
 
-                        <md-input-container flex="15">
-                            <label>ID Staff</label>
-                            <input name="Model" ng-model="ctrl.modelSearch.MODEL">
 
-                        </md-input-container>
 
                         <md-input-container flex="15">
                             <label>Status</label>
                             <md-select name="type" ng-model="ctrl.modelSearch.STATUS">
-                                <md-option value="all">Search All</md-option>
-                                <md-option value="ใช้งาน">Active</md-option>
-                                <md-option value="เลิกใช้งาน">Inactive</md-option>
+                                <md-option value="{{x.VALUE}}" ng-repeat="x in listStatus">{{x.STATUS}}</md-option>
                             </md-select>
                         </md-input-container>
 
                         <md-input-container flex="" class="pl-3">
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
-                                ng-click="ctrl.searchInventory()">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchRequest()">
                                 <i class="fas fa-search fa-sm text-white-50"></i> Search
                             </button>
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm"
-                                ng-click="ctrl.clearInventory()">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearRequest()">
                                 <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
                             </button>
                         </md-input-container>

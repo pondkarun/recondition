@@ -886,16 +886,16 @@ div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(3) {
   width: 175px;
 }
 div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(4) {
-  width: 200px;
+  width: 225px;
 }
 div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(5) {
-  width: 150px;
+  width: 175px;
 }
 div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(6) {
-  width: 150px;
+  width: 200px;
 }
 div#gridSearchRequest[kendo-grid] table colgroup col:nth-child(7) {
-  width: 150px;
+  width: 175px;
 }
 div#gridSearchRequest[kendo-grid] table colgroup col:last-of-type {
   width: 125px;

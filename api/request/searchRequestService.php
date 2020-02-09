@@ -10,6 +10,7 @@ $postRequest = json_decode($input);
 
 @$SERVICES_CODE = $postRequest->SERVICES_CODE;
 @$USER_ID = $postRequest->USER_ID;
+@$NAME_TH = $postRequest->NAME_TH;
 @$STATUS = $postRequest->STATUS;
 
 
@@ -30,9 +31,13 @@ try {
     FROM services AS s 
     INNER JOIN employees AS e ON s.USER_ID = e.ID
     INNER JOIN peripeteias AS p ON s.PERIPETEIA_ID = p.ID
+    LEFT JOIN data_topics AS d ON e.PREFIX_ID = d.ID
     WHERE 1 ";
     if ($SERVICES_CODE) {
         $query .= " AND (s.SERVICES_CODE like '%" . $SERVICES_CODE . "%') ";
+    }
+    if ($NAME_TH) {
+        $query .= " AND (CONCAT(d.DATA_TOPICS , e.NAME_TH , ' ' , e.SURNAME_TH) LIKE  '%" . $NAME_TH . "%') ";
     }
     if ($STATUS && $STATUS != "all") {
         $query .= " AND (s.STATUS like '" . $STATUS . "') ";
