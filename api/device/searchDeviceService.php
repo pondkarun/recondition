@@ -20,11 +20,6 @@ $data = array();
 
 try {
 
-    //     SELECT 
-    // CONCAT(d.DATA_TOPICS , em.NAME_TH , ' ' , em.SURNAME_TH) AS NAME
-    // FROM `employees` AS em 
-    // LEFT JOIN data_topics AS d ON em.PREFIX_ID = d.ID
-    // WHERE CONCAT(d.DATA_TOPICS , em.NAME_TH , ' ' , em.SURNAME_TH) LIKE '%บริบูรณธนา%'
 
     $query = "SELECT 
     eq.ID,

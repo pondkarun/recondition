@@ -4,22 +4,42 @@ app.controller("serviceController", ['$scope', '$rootScope', '$location', '$rout
     function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
-            INVENTORY_CODE: null,
-            BRAND: null,
-            TYPE_ID: null,
-            MODEL: null,
-            SERIAL: null,
+            USER_ID: userService.getID(),
+            SERVICES_CODE: null,
             STATUS: "all"
         };
-        this.ID = userService.getID();
         this.statusUserID = userService.getStatusID()
-
-
         this.init = function() {
             _this.statusUser = $routeParams;
             $scope.statusIf = (_this.statusUserID == "676D96D5C4C54A83BB2C9B657FD02C66") ? true : false;
-            _this.searchrService()
+            _this.searchService()
         }
+        $scope.listStatus = [{
+                ID: 1,
+                STATUS: "Search All",
+                VALUE: "all"
+            },
+            {
+                ID: 2,
+                STATUS: "แจ้งซ้อม",
+                VALUE: "แจ้งซ้อม"
+            },
+            {
+                ID: 3,
+                STATUS: "รอการอนุมัติของ",
+                VALUE: "รอการอนุมัติของ"
+            },
+            {
+                ID: 4,
+                STATUS: "แก้ไขเรียบร้อย",
+                VALUE: "แก้ไขเรียบร้อย"
+            },
+            {
+                ID: 5,
+                STATUS: "จบงาน",
+                VALUE: "จบงาน"
+            },
+        ]
 
         this.gridOptions = {
             gridID: 'gridSearchService',
@@ -99,22 +119,11 @@ app.controller("serviceController", ['$scope', '$rootScope', '$location', '$rout
             $location.path("service" + "/add/" + 0);
         }
 
-        this.searchrService = () => {
+        this.searchService = () => {
             // console.log("modelSearch", _this.modelSearch);
             loading.open();
-            $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {
-                // console.log("res.data", res.data);
-
-                res.data.filter((e) => {
-                    e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
-                    e.STATUS = (e.STATUS == 'ใช้งาน') ? "Active" : "Terminate";
-                    if (e.DisposedDate && e.DisposedDate != "0000-00-00") {
-                        e.DisposedDate = commonService.formatDate(e.DisposedDate)
-                    } else {
-                        e.DisposedDate = "-"
-                    }
-                })
-
+            $http.post(webURL.webApi + "service/searchServiceService.php", _this.modelSearch).then((res) => {
+                console.log("res.data", res.data);
                 _this.gridOptions.dataSource.data(res.data);
                 loading.close();
             }).catch((err) => {
@@ -126,11 +135,8 @@ app.controller("serviceController", ['$scope', '$rootScope', '$location', '$rout
 
         this.clearService = () => {
             _this.modelSearch = {
-                INVENTORY_CODE: null,
-                BRAND: null,
-                TYPE_ID: null,
-                MODEL: null,
-                SERIAL: null,
+                USER_ID: userService.getID(),
+                SERVICES_CODE: null,
                 STATUS: "all"
             };
             _this.searchService();

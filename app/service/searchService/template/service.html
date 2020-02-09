@@ -16,26 +16,13 @@
                         <h4 class="pr-3">Search :</h4>
                         <md-input-container flex="10">
                             <label>ID</label>
-                            <input name="ID" ng-model="ctrl.modelSearch.INVENTORY_CODE">
-                        </md-input-container>
-
-                        <md-input-container flex="20">
-                            <label>Name</label>
-                            <input name="BRAND" ng-model="ctrl.modelSearch.Name">
-                        </md-input-container>
-
-                        <md-input-container flex="15">
-                            <label>ID Staff</label>
-                            <input name="Model" ng-model="ctrl.modelSearch.MODEL">
-
+                            <input name="ID" ng-model="ctrl.modelSearch.SERVICES_CODE">
                         </md-input-container>
 
                         <md-input-container flex="15">
                             <label>Status</label>
                             <md-select name="type" ng-model="ctrl.modelSearch.STATUS">
-                                <md-option value="all">Search All</md-option>
-                                <md-option value="ใช้งาน">Active</md-option>
-                                <md-option value="เลิกใช้งาน">Inactive</md-option>
+                                <md-option value="{{x.VALUE}}" ng-repeat="x in listStatus">{{x.STATUS}}</md-option>
                             </md-select>
                         </md-input-container>
 
@@ -49,7 +36,7 @@
                         </md-input-container>
 
                     </div>
-                    <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-edit="ctrl.gridCallbackEdit">
+                    <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-view="ctrl.gridCallbackView">
                     </grid-search>
                 </div>
             </div>
