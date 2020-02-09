@@ -67,7 +67,7 @@ app.controller("serviceController", ['$scope', '$rootScope', '$location', '$rout
                 },
 
                 {
-                    field: "START_DATE",
+                    field: "CreateDate",
                     title: "Create Date",
                     attributes: {
                         class: "text-center"
