@@ -111,7 +111,7 @@ app.controller("requestController", ['$scope', '$rootScope', '$location', '$rout
         };
         this.gridCallbackView = (item) => {
             // console.log("item", item);
-            $location.path("request" + "/View/" + item.ID);
+            $location.path("request" + "/view/" + item.ID);
         }
 
 

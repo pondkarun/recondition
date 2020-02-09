@@ -20,6 +20,7 @@ try {
 
 
     $query = "SELECT 
+    s.ID,
     s.SERVICES_CODE,
     CONCAT((SELECT DATA_TOPICS FROM data_topics WHERE ID = e.PREFIX_ID) ,e.NAME_TH  , ' ' ,  e.SURNAME_TH) AS NAME_TH,
     e.DEPARTMENT,

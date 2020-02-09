@@ -15,23 +15,16 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <form name="projectForm" class="container" novalidate>
-
-
+                        <br>
                         <div layout="row">
-                            <md-input-container flex="50">
-                                <md-input-container class="md-block">
-                                    <label>ID</label>
-                                    <input type="text" ng-model="ctrl.modelSave.INVENTORY_CODE" ng-disabled="true">
-                                </md-input-container>
-
+                            <md-input-container class="md-block" flex="50">
+                                <label>ID</label>
+                                <input type="text" ng-model="ctrl.modelSave.SERVICES_CODE" ng-disabled="true">
                             </md-input-container>
 
-                            <md-input-container flex="50">
-                                <md-input-container class="md-block">
-
-                                    <md-datepicker ng-model="ctrl.modelSave.PurchaseDate" class="datepicker" md-open-on-focus ng-disabled="true">
-                                    </md-datepicker>
-                                </md-input-container>
+                            <md-input-container class="md-block" flex="50">
+                                <label>Create Date</label>
+                                <input type="text" ng-model="ctrl.modelSave.CreateDate" ng-disabled="true">
                             </md-input-container>
                         </div>
 
@@ -47,7 +40,7 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Detail</label>
-                            <textarea ng-model="ctrl.modelSave.DETAIL" rows="5" md-select-on-focus ng-disabled="false"></textarea>
+                            <textarea ng-model="ctrl.modelSave.DETAIL" rows="5" md-select-on-focus ng-disabled="true"></textarea>
                         </md-input-container>
 
                         <md-input-container class="md-block" flex-gt-sm>
@@ -63,8 +56,7 @@
                         <md-input-container class="md-block" flex="50" flex-gt-sm>
                             <label>Status</label>
                             <md-select name="type" ng-model="ctrl.modelSave.STATUS">
-                                <md-option value="ใช้งาน">Active</md-option>
-                                <md-option value="เลิกใช้งาน">Inactive</md-option>
+                                <md-option value="{{x.VALUE}}" ng-repeat="x in listStatus">{{x.STATUS}}</md-option>
                             </md-select>
                         </md-input-container>
 
@@ -74,7 +66,7 @@
 
                             <div class="footer-form-button pt-5" layout="row" layout-align="center center" ng-if="!typeAdd">
 
-                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="ctrl.saveForm()">
+                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม'" ng-click="ctrl.saveForm()">
                                     Save
                                 </md-button>
 
