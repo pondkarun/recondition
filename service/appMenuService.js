@@ -229,19 +229,59 @@ app.config(function($routeProvider, $mdDateLocaleProvider) {
                 if (!userService.isUserLoggedIn()) {
                     $location.path('/login');
                 } else {
-                    if (userService.getStatusID() != "676D96D5C4C54A83BB2C9B657FD02C66") {
-                        $location.path('/account');
-                    } else {
-                        let model = {
-                            ROUTEP: "service",
-                            ID_STATUS_EM: userService.getStatusID()
-                        }
-                        $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
-                            if (Number(res.data.COUNT_ID) <= 0) {
-                                $location.path('/account');
-                            }
-                        })
+
+                    let model = {
+                        ROUTEP: "service",
+                        ID_STATUS_EM: userService.getStatusID()
                     }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+
+                }
+            },
+        },
+    }).when("/manager", {
+        templateUrl: "app/manager/searchManager/template/manager.html",
+        controller: "managerController",
+        resolve: {
+            check: function($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+                    let model = {
+                        ROUTEP: "manager",
+                        ID_STATUS_EM: userService.getStatusID()
+                    }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+                }
+            },
+        },
+    }).when("/manager/:Type/:ID", {
+        templateUrl: "app/manager/viewManager/template/viewManager.html",
+        controller: "viewManagerController",
+        resolve: {
+            check: function($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+
+                    let model = {
+                        ROUTEP: "manager",
+                        ID_STATUS_EM: userService.getStatusID()
+                    }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+
                 }
             },
         },
