@@ -3,6 +3,7 @@
 app.controller("viewRequestController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
     function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
+        $scope.isDisabled = false;
         this.modelSave = {
             ID: null,
             SERVICES_CODE: null,
@@ -50,6 +51,7 @@ app.controller("viewRequestController", ['$scope', '$rootScope', '$location', '$
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
                 // console.log("modelSave", _this.modelSave);
+                _this.modelSave.STAF_ID = userService.getID();
                 $http.post(webURL.webApi + "request/updateRequestService.php", _this.modelSave).then((res) => {
                     // console.log("res.data", res.data);
                     showAlertBox(msgSettings.msgSaveSucc, null);
@@ -86,12 +88,17 @@ app.controller("viewRequestController", ['$scope', '$rootScope', '$location', '$
             loading.open();
             // console.log("getRequestIT ID", ID);
             $http.post(webURL.webApi + "request/getRequestEditViewService.php", ID).then((res) => {
-                // console.log("res.data", res.data);
+                console.log("res.data", res.data);
                 if (res.data.status == "404") {
                     showAlertBox(msgSettings.msgErrorApi, null);
                 } else {
                     _this.modelSave = res.data
                 }
+
+                if (_this.modelSave.STATUS != "แจ้งซ้อม") {
+                    $scope.isDisabled = true;
+                }
+
                 loading.close();
             }).catch((err) => {
                 console.log("Error");

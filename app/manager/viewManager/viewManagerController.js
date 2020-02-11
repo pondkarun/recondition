@@ -3,6 +3,7 @@
 app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
     function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
+        $scope.isDisabled = false;
         this.modelSave = {
             ID: null,
             SERVICES_CODE: null,
@@ -103,6 +104,11 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
                 } else {
                     _this.modelSave = res.data
                 }
+
+                if (_this.modelSave.STATUS == "แก้ไขเรียบร้อย") {
+                    $scope.isDisabled = true;
+                }
+
                 loading.close();
             }).catch((err) => {
                 console.log("Error");

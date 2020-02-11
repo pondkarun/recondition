@@ -7,8 +7,7 @@ app.controller("addEditServiceController", ['$scope', '$rootScope', '$location',
         this.listType = [];
         this.listPeripeteiasAll = [];
         this.listPeripeteias = [];
-
-
+        $scope.showSatisfaction = false;
 
         this.init = function() {
             _this.typePage = $routeParams;
@@ -22,13 +21,14 @@ app.controller("addEditServiceController", ['$scope', '$rootScope', '$location',
                 }
             } else if (_this.typePage.Type == "view") {
                 $scope.isAdd = false
-                getServiceEditView(_this.typePage.ID)
+                getRequestIT(_this.typePage.ID);
             } else {
                 $location.path("service");
             }
 
             getTypeInventory();
             getPeripeteias();
+
 
         }
 
@@ -42,15 +42,26 @@ app.controller("addEditServiceController", ['$scope', '$rootScope', '$location',
             if (!$scope.projectForm.$valid || !_this.modelSave.TYPE_ID) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
-                console.log("modelSave", _this.modelSave);
-                $http.post(webURL.webApi + "service/addServiceService.php", _this.modelSave).then((res) => {
-                    // console.log("res.data", res.data);
-                    showAlertBox(msgSettings.msgSaveSucc, null);
-                }).catch((err) => {
-                    showAlertBox(msgSettings.msgNotSave, null);
-                }).finally(() => {
-                    $location.path("service");
-                });
+                // console.log("modelSave", _this.modelSave);
+                if ($scope.isAdd) {
+                    $http.post(webURL.webApi + "service/addServiceService.php", _this.modelSave).then((res) => {
+                        // console.log("res.data", res.data);
+                        showAlertBox(msgSettings.msgSaveSucc, null);
+                    }).catch((err) => {
+                        showAlertBox(msgSettings.msgNotSave, null);
+                    }).finally(() => {
+                        $location.path("service");
+                    });
+                } else {
+                    $http.post(webURL.webApi + "service/updateServiceService.php", _this.modelSave).then((res) => {
+                        // console.log("res.data", res.data);
+                        showAlertBox(msgSettings.msgSaveSucc, null);
+                    }).catch((err) => {
+                        showAlertBox(msgSettings.msgNotSave, null);
+                    }).finally(() => {
+                        $location.path("service");
+                    });
+                }
             }
         }
 
@@ -100,9 +111,31 @@ app.controller("addEditServiceController", ['$scope', '$rootScope', '$location',
             })
         }
 
-        const getServiceEditView = (ID) => {
-            console.log("getServiceEditView ID", ID);
+
+        const getRequestIT = (ID) => {
+            loading.open();
+            // console.log("getRequestIT ID", ID);
+            $http.post(webURL.webApi + "request/getRequestEditViewService.php", ID).then((res) => {
+                // console.log("res.data", res.data);
+                if (res.data.status == "404") {
+                    showAlertBox(msgSettings.msgErrorApi, null);
+                } else {
+                    _this.modelSave = res.data
+                }
+
+                if (_this.modelSave.STATUS == "แก้ไขเรียบร้อย") {
+                    $scope.showSatisfaction = true;
+                }
+
+
+                loading.close();
+            }).catch((err) => {
+                console.log("Error");
+                loading.close();
+                showAlertBox(msgSettings.msgErrorApi, null);
+            })
         }
+
 
 
     }

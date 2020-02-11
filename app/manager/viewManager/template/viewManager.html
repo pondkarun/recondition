@@ -51,12 +51,12 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Remark</label>
-                            <textarea ng-model="ctrl.modelSave.MANAGER_REMARK" rows="5" md-select-on-focus ng-disabled="false"></textarea>
+                            <textarea ng-model="ctrl.modelSave.MANAGER_REMARK" rows="5" md-select-on-focus ng-disabled="isDisabled"></textarea>
                         </md-input-container>
 
                         <md-input-container class="input-container pb-5" flex="100" layout="row">
 
-                            <md-radio-group ng-disabled="" ng-model="ctrl.modelSave.MANAGER_STATUS" flex layout="row">
+                            <md-radio-group ng-disabled="isDisabled" ng-model="ctrl.modelSave.MANAGER_STATUS" flex layout="row">
                                 <md-radio-button value="{{x.STATUS}}" ng-repeat="x in ctrl.listApprove">
                                     <span class="pl-5">{{x.STATUS}}</span>
                                 </md-radio-button>
@@ -68,7 +68,7 @@
 
                             <div class="footer-form-button pt-5" layout="row" layout-align="center center" ng-if="!typeAdd">
 
-                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม'" ng-click="ctrl.saveForm()">
+                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม' && !isDisabled" ng-click="ctrl.saveForm()">
                                     Save
                                 </md-button>
 

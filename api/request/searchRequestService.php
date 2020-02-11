@@ -45,7 +45,7 @@ try {
         $query .= " AND (s.STATUS like '" . $STATUS . "') ";
     }
 
-    if ($STATUS_ID_USER == 'DF4EA7139B204A0D81EF06EADB40FA05') {
+    if ($STATUS_ID_USER == 'DF4EA7139B204A0D81EF06EADB40FA05' && $STATUS == "แก้ไขเรียบร้อย") {
         $query .= " AND (s.MANAGER_ID = '" . $MANAGER_ID . "') ";
     }
 

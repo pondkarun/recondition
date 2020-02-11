@@ -27,7 +27,8 @@ try {
     s.STATUS,
     s.ANALYZE,
     s.MANAGER_STATUS,
-    s.MANAGER_REMARK
+    s.MANAGER_REMARK,
+    s.PERIPETEIA_ID
     FROM services AS s 
     INNER JOIN peripeteias AS p ON s.PERIPETEIA_ID = p.ID
     INNER JOIN data_topics AS d ON p.TYPE_ID = d.ID

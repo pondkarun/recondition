@@ -45,17 +45,17 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Remark</label>
-                            <textarea ng-model="ctrl.modelSave.REMARK" rows="3" md-select-on-focus ng-disabled="false"></textarea>
+                            <textarea ng-model="ctrl.modelSave.REMARK" rows="3" md-select-on-focus ng-disabled="isDisabled"></textarea>
                         </md-input-container>
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Analyze & Repair</label>
-                            <textarea ng-model="ctrl.modelSave.ANALYZE" rows="5" md-select-on-focus ng-disabled="false"></textarea>
+                            <textarea ng-model="ctrl.modelSave.ANALYZE" rows="5" md-select-on-focus ng-disabled="isDisabled"></textarea>
                         </md-input-container>
 
                         <md-input-container class="md-block" flex="50" flex-gt-sm>
                             <label>Status</label>
-                            <md-select name="type" ng-model="ctrl.modelSave.STATUS">
+                            <md-select name="type" ng-model="ctrl.modelSave.STATUS" ng-disabled="isDisabled">
                                 <md-option value="{{x.VALUE}}" ng-repeat="x in listStatus">{{x.STATUS}}</md-option>
                             </md-select>
                         </md-input-container>
@@ -66,7 +66,7 @@
 
                             <div class="footer-form-button pt-5" layout="row" layout-align="center center" ng-if="!typeAdd">
 
-                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม'" ng-click="ctrl.saveForm()">
+                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม' && !isDisabled" ng-click="ctrl.saveForm()">
                                     Save
                                 </md-button>
 
