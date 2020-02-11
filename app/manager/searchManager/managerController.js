@@ -6,19 +6,13 @@ app.controller("managerController", ['$scope', '$rootScope', '$location', '$rout
         this.modelSearch = {
             SERVICES_CODE: null,
             NAME_TH: null,
+            STATUS_ID_USER: userService.getStatusID(),
+            MANAGER_ID: userService.getID(),
             STATUS: "รอการอนุมัติของ"
         };
 
-        $scope.listStatus = [{
-                ID: 1,
-                STATUS: "Search All",
-                VALUE: "all"
-            },
-            {
-                ID: 2,
-                STATUS: "แจ้งซ้อม",
-                VALUE: "แจ้งซ้อม"
-            },
+        $scope.listStatus = [
+
             {
                 ID: 3,
                 STATUS: "รอการอนุมัติของ",
@@ -28,12 +22,8 @@ app.controller("managerController", ['$scope', '$rootScope', '$location', '$rout
                 ID: 4,
                 STATUS: "แก้ไขเรียบร้อย",
                 VALUE: "แก้ไขเรียบร้อย"
-            },
-            {
-                ID: 5,
-                STATUS: "จบงาน",
-                VALUE: "จบงาน"
-            },
+            }
+
         ]
 
         this.init = function() {
@@ -133,6 +123,8 @@ app.controller("managerController", ['$scope', '$rootScope', '$location', '$rout
             _this.modelSearch = {
                 SERVICES_CODE: null,
                 NAME_TH: null,
+                STATUS_ID_USER: userService.getStatusID(),
+                MANAGER_ID: userService.getID(),
                 STATUS: "รอการอนุมัติของ"
             };
             _this.searchRequest();

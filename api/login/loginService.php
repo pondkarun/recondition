@@ -28,10 +28,6 @@ if (mysqli_num_rows($result) == 1) {
     $response['STATUS_ID'] = $row["STATUS_ID"];
     $response['STATUS'] = $row["STATUS"];
     $response['statusLogin'] = 'loggedin';
-
-
-    $_SESSION['ID'] = $response['ID'];
-    $_SESSION['USERNAME'] = $USERNAME;
 } else {
     $response['status'] = 'error';
 }

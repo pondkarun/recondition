@@ -12,7 +12,8 @@ $postRequest = json_decode($input);
 @$USER_ID = $postRequest->USER_ID;
 @$NAME_TH = $postRequest->NAME_TH;
 @$STATUS = $postRequest->STATUS;
-
+@$STATUS_ID_USER = $postRequest->STATUS_ID_USER;
+@$MANAGER_ID = $postRequest->MANAGER_ID;
 
 
 $data = array();
@@ -42,6 +43,10 @@ try {
     }
     if ($STATUS && $STATUS != "all") {
         $query .= " AND (s.STATUS like '" . $STATUS . "') ";
+    }
+
+    if ($STATUS_ID_USER == 'DF4EA7139B204A0D81EF06EADB40FA05') {
+        $query .= " AND (s.MANAGER_ID = '" . $MANAGER_ID . "') ";
     }
 
     $query .= " ORDER BY s.SERVICES_CODE ASC ";

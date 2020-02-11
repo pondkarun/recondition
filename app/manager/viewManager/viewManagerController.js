@@ -14,6 +14,16 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
             STATUS: null
         };
         this.listType = [];
+        this.listApprove = [{
+                ID: 1,
+                STATUS: "อนุมัติ"
+            },
+            {
+                ID: 2,
+                STATUS: "ไม่อนุมัติ"
+            }
+        ];
+
 
         $scope.listStatus = [{
                 ID: 2,
@@ -41,22 +51,23 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
 
 
         this.cancelForm = () => {
-            $location.path("request");
+            $location.path("manager");
         }
 
         this.saveForm = () => {
 
-            if (!$scope.projectForm.$valid) {
+            if (!_this.modelSave.MANAGER_STATUS) {
                 showAlertBox(msgSettings.msgValidForm, null);
             } else {
-                // console.log("modelSave", _this.modelSave);
-                $http.post(webURL.webApi + "request/updateRequestService.php", _this.modelSave).then((res) => {
+                _this.modelSave.MANAGER_ID = userService.getID();
+                console.log("modelSave", _this.modelSave);
+                $http.post(webURL.webApi + "manager/updateManagerService.php", _this.modelSave).then((res) => {
                     // console.log("res.data", res.data);
                     showAlertBox(msgSettings.msgSaveSucc, null);
                 }).catch((err) => {
                     showAlertBox(msgSettings.msgNotSave, null);
                 }).finally(() => {
-                    $location.path("request");
+                    $location.path("manager");
                 });
             }
         }

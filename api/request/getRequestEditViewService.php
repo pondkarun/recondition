@@ -25,7 +25,9 @@ try {
     CONCAT(p.PERIPETEIA , ' ' ,  s.DETAIL) AS DETAIL,
     s.REMARK,
     s.STATUS,
-    s.ANALYZE
+    s.ANALYZE,
+    s.MANAGER_STATUS,
+    s.MANAGER_REMARK
     FROM services AS s 
     INNER JOIN peripeteias AS p ON s.PERIPETEIA_ID = p.ID
     INNER JOIN data_topics AS d ON p.TYPE_ID = d.ID
@@ -43,6 +45,8 @@ try {
         $response['REMARK'] = $row["REMARK"];
         $response['STATUS'] = $row["STATUS"];
         $response['ANALYZE'] = $row["ANALYZE"];
+        $response['MANAGER_STATUS'] = $row["MANAGER_STATUS"];
+        $response['MANAGER_REMARK'] = $row["MANAGER_REMARK"];
         $response['status'] = '200';
     } else {
         $response['status'] = '404';
