@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <?php
 require_once('../condb.php');
 
@@ -16,6 +17,7 @@ $PurchaseDate = @$postRequest->PurchaseDate;
 $DisposedDate = @$postRequest->DisposedDate;
 $STATUS = @$postRequest->STATUS;
 
+$DisposedDate = ($DisposedDate) ? $DisposedDate : '0000-00-00';
 
 $sql = "UPDATE `inventory` SET
     

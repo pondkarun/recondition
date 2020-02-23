@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL); //ถ้าปิด ใส่ 0
 
-$localhost = "103.22.183.220";
+$localhost = "localhost";
 $username_db = "smomscic";
 $password_db = "Jj*5cQ6)ub5VK1";
 $db_name = "smomscic_recond";

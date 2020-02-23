@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <?php
 require_once('../condb.php');
 
@@ -28,6 +29,8 @@ for ($i = 0; $i < $countPostRequest; $i++) {
         @$postRequest[$i]->DisposedDate,
         @$postRequest[$i]->STATUS
     );
+
+    $statement[5] = ($statement[5]) ? $statement[5] : '0000-00-00';
 
     $sql = "INSERT INTO inventory 
     (
