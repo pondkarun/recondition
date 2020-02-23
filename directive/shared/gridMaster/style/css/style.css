@@ -812,7 +812,7 @@ div[kendo-scheduler].k-scheduler .k-editor-toolbar .k-editor-dropdown {
 }
 
 div#gridSearchInventory[kendo-grid] table colgroup col:first-of-type {
-  width: 125px;
+  width: 90px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(2) {
   width: 125px;
@@ -821,10 +821,10 @@ div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(3) {
   width: 125px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(4) {
-  width: 300px;
+  width: 125px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(5) {
-  width: 125px;
+  width: 300px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(6) {
   width: 125px;
@@ -833,6 +833,9 @@ div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(7) {
   width: 125px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(8) {
+  width: 125px;
+}
+div#gridSearchInventory[kendo-grid] table colgroup col:nth-child(9) {
   width: 200px;
 }
 div#gridSearchInventory[kendo-grid] table colgroup col:last-of-type {

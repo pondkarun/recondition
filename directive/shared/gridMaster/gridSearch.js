@@ -40,6 +40,7 @@ app.directive("gridSearch", [function() {
                         template: "{{setIndex(dataItem)}}",
                         attributes: {
                             // "data-title": "ลำดับ",
+                            class: "text-center"
                         }
                     })
                 }

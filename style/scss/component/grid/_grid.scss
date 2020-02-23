@@ -23,7 +23,7 @@ div#gridSearchInventory[kendo-grid] {
         colgroup {
             col {
                 @include first-child() {
-                    width: 125px;
+                    width: 90px;
                 }
                 &:nth-child(2) {
                     width: 125px;
@@ -32,10 +32,10 @@ div#gridSearchInventory[kendo-grid] {
                     width: 125px;
                 }
                 &:nth-child(4) {
-                    width: 300px;
+                    width: 125px;
                 }
                 &:nth-child(5) {
-                    width: 125px;
+                    width: 300px;
                 }
                 &:nth-child(6) {
                     width: 125px;
@@ -44,6 +44,9 @@ div#gridSearchInventory[kendo-grid] {
                     width: 125px;
                 }
                 &:nth-child(8) {
+                    width: 125px;
+                }
+                &:nth-child(9) {
                     width: 200px;
                 }
                 @include last-child() {

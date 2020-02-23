@@ -1,7 +1,7 @@
 'use strict'
 
 app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSave = [];
         $scope.listType = [];
@@ -9,7 +9,7 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
         this.typePage = {}
 
 
-        this.init = function () {
+        this.init = function() {
             //alert("เพิ่ม");
             _this.typePage = $routeParams;
             getTypeInventory();
@@ -92,7 +92,7 @@ app.controller("addEditInventoryController", ['$scope', '$rootScope', '$location
                 del: true,
                 edit: false
             },
-            showIndex: false,
+            showIndex: true,
         };
 
         //ลบข้อมูลในตาราง
