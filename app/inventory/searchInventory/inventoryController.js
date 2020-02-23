@@ -92,7 +92,7 @@ app.controller("inventoryController", ['$scope', '$rootScope', '$location', '$ro
                 del: false,
                 edit: true
             },
-            showIndex: false,
+            showIndex: true,
         };
         this.gridCallbackEdit = (item) => {
             // console.log("item", item);
