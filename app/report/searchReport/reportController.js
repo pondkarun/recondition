@@ -4,13 +4,8 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
     function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
-            ID: null,
-            COMID: null,
-            NAME_STAFF: null,
-            NAME_EM: null,
             START_DATE: null,
-            END_DATE: null,
-            STATUS: "all"
+            END_DATE: null
         };
         _this.ID = userService.getID();
 
@@ -18,95 +13,15 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
             _this.searchReport();
         }
 
-        this.gridOptions = {
-            gridID: 'gridSearchReport',
-            dataSource: new kendo.data.DataSource({ data: [], pageSize: 10 }),
-            sortable: true,
-            pageable: true,
-            columns: [{
-                    field: "ID",
-                    title: "ID",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "COMID",
-                    title: "Company",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "NAME_STAFF",
-                    title: "ผู้ซ่อม",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "NAME_EM",
-                    title: "ผู้แจ้ง",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "STATUS",
-                    title: "Status",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "START_DATE",
-                    title: "Start Date ",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-                {
-                    field: "END_DATE",
-                    title: "End Date",
-                    attributes: {
-                        class: "text-center"
-                    }
-                },
-
-            ],
-            management: false,
-            operation: {
-                view: false,
-                del: false,
-                edit: false
-            },
-            showIndex: false,
-        };
-
+      
 
         this.searchReport = () => {
-            // console.log("modelSearch", _this.modelSearch);
+             console.log("modelSearch", _this.modelSearch);
             loading.open();
-            $http.post(webURL.webApi + "inventory/searchInventoryService.php", _this.modelSearch).then((res) => {
-                // console.log("res.data", res.data);
-
-                res.data.filter((e) => {
-                    e.PurchaseDate = commonService.formatDate(e.PurchaseDate)
-                    e.STATUS = (e.STATUS == 'ใช้งาน') ? "Active" : "Terminate";
-                    if (e.DisposedDate && e.DisposedDate != "0000-00-00") {
-                        e.DisposedDate = commonService.formatDate(e.DisposedDate)
-                    } else {
-                        e.DisposedDate = "-"
-                    }
-                })
-
-                _this.gridOptions.dataSource.data(res.data);
+            $http.post(webURL.webApi + "report/reportService.php", _this.modelSearch).then((res) => {
+                console.log("res.data", res.data);
+                res.data.filter(e => e.AVG = e.AVG ? e.AVG : 0) 
+                this.listReport = res.data
                 loading.close();
             }).catch((err) => {
                 console.log("Error");
@@ -116,13 +31,9 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
         }
 
         this.clearReport = () => {
-            _this.modelSearch = {
-                INVENTORY_CODE: null,
-                BRAND: null,
-                TYPE_ID: null,
-                MODEL: null,
-                SERIAL: null,
-                STATUS: "all"
+            this.modelSearch = {
+                START_DATE: null,
+                END_DATE: null
             };
             _this.searchReport();
         }
@@ -131,6 +42,14 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
             var dialog = customDialog.defaultObj();
             dialog.content = msg;
             customDialog.alert(callback, dialog);
+        }
+
+        $scope.printDiv = () => {
+            var divToPrint = document.getElementById("printTable");
+            var newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
         }
 
 

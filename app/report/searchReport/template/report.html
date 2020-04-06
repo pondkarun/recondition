@@ -1,6 +1,6 @@
 <div ng-controller="reportController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">สรุปข้อมลการแจ้งซ่อม</h1>
+        <h1 class="h3 mb-0 text-gray-800">รายงานสรุปผลการประเมินการปฏิบัติงาน</h1>
     </div>
 
 
@@ -14,28 +14,7 @@
 
                     <div layout="row">
                         <h4 class="pr-3">Search :</h4>
-                        <md-input-container flex="10">
-                            <label>ID</label>
-                            <input name="ID" ng-model="ctrl.modelSearch.ID">
-                        </md-input-container>
-
-
-                        <md-input-container flex="10">
-                            <label>Company</label>
-                            <input name="COMID" ng-model="ctrl.modelSearch.COMID">
-                        </md-input-container>
-
-                        <md-input-container flex="15">
-                            <label>ผู้ซ่อม</label>
-                            <input name="Model" ng-model="ctrl.modelSearch.NAME_STAFF">
-
-                        </md-input-container>
-
-                        <md-input-container flex="15">
-                            <label>ผู้แจ้ง</label>
-                            <input name="clientName" ng-model="ctrl.modelSearch.NAME_EM">
-                        </md-input-container>
-
+                        
                         <md-input-container flex="15">
                             <label>Start Date</label>
                             <md-datepicker ng-model="ctrl.modelSearch.START_DATE" md-open-on-focus ng-required="ctrl.modelSearch.END_DATE">
@@ -48,28 +27,61 @@
                             </md-datepicker>
 
                         </md-input-container>
-
-                        <md-input-container flex="10">
-                            <label>Status</label>
-                            <md-select name="type" ng-model="ctrl.modelSearch.STATUS">
-                                <md-option value="all">Search All</md-option>
-                                <md-option value="ใช้งาน">Active</md-option>
-                                <md-option value="หมดอายุการใช้งาน">Terminate</md-option>
-                            </md-select>
+                        <md-input-container>
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchReport()">
+                                    <i class="fas fa-search fa-sm text-white-50"></i> Search
+                                </button>
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearReport()">
+                                    <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
+                                </button>
                         </md-input-container>
+                        
                     </div>
-                    <md-input-container>
-                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchInventory()">
-                                <i class="fas fa-search fa-sm text-white-50"></i> Search
-                            </button>
-                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearInventory()">
-                                <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
-                            </button>
-                    </md-input-container>
+                   
 
 
-                    <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-edit="ctrl.gridCallbackEdit">
-                    </grid-search>
+                    <div>
+                        <md-input-container flex="">
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="printDiv()">
+                                <i class="fas fa-print fa-sm text-white-50"></i> Print
+                            </button>
+                        </md-input-container>
+                        <div id="printTable">
+                            <div class="page-list">
+
+                                <h3 style="text-align: center; padding-bottom: 10px;">รายงานสรุปผลการประเมินการปฏิบัติงาน</h3>
+                                <table class="table table-bordered" width="100%" cellspacing="0" border="1" cellpadding="3">
+                                    <thead style="text-align: center;">
+                                        <tr>
+                                            <th>List</th>
+                                            <th>Name</th>
+                                            <th>ID</th>
+                                            <th>Standard</th>
+                                            <th>Non Standard</th>
+                                            <th>Job Total</th>
+                                            <th>Satisfaction</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody style="text-align: center;">
+                                        <tr ng-repeat="x in ctrl.listReport">
+                                            <td>{{$index + 1}}</td>
+                                            <td style="text-align: left; padding-left: 5px;">{{x.Name}}</td>
+                                            <td >{{x.EMPLOYEE_CODE}}</td>
+                                            <td>{{x.total_work | number}}</td>
+                                            <td>{{x.NonStandard | number}}</td>
+                                            <td>{{x.total_work | number}}</td>
+                                            <td>{{x.AVG | number}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="ctrl.listReport.length == 0">
+                        <p class="text-center">-- ไม่พบข้อมูล --</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,3 +89,15 @@
 
     </div>
 </div>
+
+
+<style>
+    .page-list {
+        background-color: #fff;
+        padding: 5px;
+        text-align: left;
+        color: black;
+        height: 500px;
+        overflow-x: auto;
+    }
+</style>
