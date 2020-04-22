@@ -4,17 +4,14 @@ app.controller("usersController", ['$scope', '$rootScope', '$location', '$routeP
     function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         this.modelSearch = {
-            INVENTORY_CODE: null,
-            TYPE_ID: null,
             Name: null,
             EMPLOYEE_CODE: null,
-            STATUS: "ใช้งาน"
         };
         _this.ID = userService.getID();
 
         this.init = function () {
             getTypeInventory();
-            _this.searchDevice();
+            _this.searchUsers();
         }
 
         this.gridOptions = {
@@ -23,16 +20,8 @@ app.controller("usersController", ['$scope', '$rootScope', '$location', '$routeP
             sortable: true,
             pageable: true,
             columns: [{
-                field: "INVENTORY_CODE",
+                field: "EMPLOYEE_CODE",
                 title: "ID",
-                attributes: {
-                    class: "text-center"
-                }
-            },
-
-            {
-                field: "TYPE",
-                title: "Type",
                 attributes: {
                     class: "text-center"
                 }
@@ -54,63 +43,19 @@ app.controller("usersController", ['$scope', '$rootScope', '$location', '$routeP
                 }
             },
 
-            {
-                field: "EMPLOYEE_CODE",
-                title: "ID Staff",
-                attributes: {
-                    class: "text-center"
-                }
-            },
-
-            {
-                field: "CREATE_DATE",
-                title: "Create Date",
-                attributes: {
-                    class: "text-center"
-                }
-            },
-
-            {
-                field: "STATUS",
-                title: "Status",
-                attributes: {
-                    class: "text-center"
-                }
-            }
+           
             ],
-            management: true,
+            management: false,
             operation: {
                 view: false,
-                del: true,
+                del: false,
                 edit: false
             },
             showIndex: false,
         };
-        this.gridCallbackDel = (item) => {
-
-            var callback = () => {
-                let dateNow = commonService.formatDatDB(new Date());
-                let model = {
-                    ID: item.ID,
-                    EXPIRED_DATE: dateNow
-                }
-                console.log("model", model);
-                loading.open();
-                $http.post(webURL.webApi + "device/delDeviceService.php", model).then((res) => {
-                    //console.log("res.data", res.data);
-                    // showAlertBox(msgSettings.msgSaveSucc, null);
-                }).catch((err) => {
-                    loading.close();
-                    showAlertBox(msgSettings.msgNotSave, null);
-                }).finally(() => {
-                    loading.close();
-                    _this.searchDevice()
-                });
-            }
-            showConfirmBox(msgSettings.msgDelConfirm, callback, undefined);
-        }
-        this.addDevice = () => {
-            $location.path("device" + "/add/" + 0);
+       
+        this.addUsers = () => {
+            $location.path("users" + "/add/" + 0);
         }
 
         const getTypeInventory = () => {
@@ -122,10 +67,10 @@ app.controller("usersController", ['$scope', '$rootScope', '$location', '$routeP
             })
         }
 
-        this.searchDevice = () => {
-            console.log("modelSearch", _this.modelSearch);
+        this.searchUsers = () => {
+            // console.log("modelSearch", _this.modelSearch);
             loading.open();
-            $http.post(webURL.webApi + "device/searchDeviceService.php", _this.modelSearch).then((res) => {
+            $http.post(webURL.webApi + "user/searchUsersService.php", _this.modelSearch).then((res) => {
                 // console.log("res.data", res.data);
 
                 res.data.filter((e) => {
@@ -147,15 +92,12 @@ app.controller("usersController", ['$scope', '$rootScope', '$location', '$routeP
             })
         }
 
-        this.clearDevice = () => {
+        this.clearUsers = () => {
             this.modelSearch = {
-                INVENTORY_CODE: null,
-                TYPE_ID: null,
                 Name: null,
                 EMPLOYEE_CODE: null,
-                STATUS: "ใช้งาน"
             };
-            _this.searchDevice();
+            _this.searchUsers();
         }
 
         //************dialog func***************//
