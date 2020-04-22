@@ -144,6 +144,46 @@ app.config(function ($routeProvider, $mdDateLocaleProvider) {
                 }
             },
         },
+    }).when("/users", {
+        templateUrl: "app/users/searchUsers/template/users.html",
+        controller: "usersController",
+        resolve: {
+            check: function ($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+                    let model = {
+                        ROUTEP: "users",
+                        ID_STATUS_EM: userService.getStatusID()
+                    }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+                }
+            },
+        },
+    }).when("/users/add/:ID", {
+        templateUrl: "app/users/addEditUsers/template/addEditUsers.html",
+        controller: "addEditUsersController",
+        resolve: {
+            check: function ($location, userService, $http) {
+                if (!userService.isUserLoggedIn()) {
+                    $location.path('/login');
+                } else {
+                    let model = {
+                        ROUTEP: "users",
+                        ID_STATUS_EM: userService.getStatusID()
+                    }
+                    $http.post(webURL.webApi + "menu/chackMenuUserService.php", model).then((res) => {
+                        if (Number(res.data.COUNT_ID) <= 0) {
+                            $location.path('/account');
+                        }
+                    })
+                }
+            },
+        },
     }).when("/request", {
         templateUrl: "app/request/searchRequest/template/request.html",
         controller: "requestController",
