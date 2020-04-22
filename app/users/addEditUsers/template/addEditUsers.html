@@ -1,7 +1,9 @@
 <div ng-controller="addEditUsersController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Device Profile</h1>
+        <h1 class="h3 mb-0 text-gray-800">Add Users</h1>
     </div>
+
+
 
     <div class="row">
 
@@ -9,58 +11,104 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <div class="card-body">
+                    <div class="container">
+                        <md-content layout-padding>
+                            <div>
+                                <form name="userForm" novalidate>
 
 
-                    <form name="deviceForm" class="container" novalidate>
-                        <div layout="row" ng-if="typeAdd">
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>คำนำหน้า</label>
+                                            <md-select name="STATUS_ID" ng-model="modelSave.PREFIX_ID">
+                                                <md-option value="406EBE42EE984C829CD376D888CA3282">นางสาว</md-option>
+                                                <md-option value="DEE88C36336A4A0F9EB6D32417B17786">นาง</md-option>
+                                                <md-option value="9C82BBE7B7FC4D5EA839BA9EB504790C">นาย</md-option>
+                                                <md-option value="73421338A88D4467A63425FBB0912EB3">ว่าที่ ร.ต.</md-option>
+                                            </md-select>
+                                        </md-input-container>
 
-                            <md-autocomplete class="col-md-5 " flex="100" ng-required="true" md-no-cache="ctrl.config.noCache" md-selected-item="ctrl.config.selectedItem" md-search-text="ctrl.config.searchText" md-selected-item-change="ctrl.selectedItem(item)" md-items="item in ctrl.querySearch(ctrl.config.searchText)"
-                                md-item-text="item.Name" md-min-length="0" md-input-name="Name" md-floating-label="User">
-                                <md-item-template>
-                                    <span md-highlight-text="ctrl.config.searchText" md-highlight-flags="^i">{{item.Name}}</span>
-                                </md-item-template>
-                                <md-not-found>
-                                    ไม่พบข้อมูลที่ตรงกับ "{{ctrl.config.searchText}}"
-                                </md-not-found>
-                            </md-autocomplete>
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>ชื่อจริง</label>
+                                            <input ng-model="modelSave.NAME_TH" ng-disabled="false" required>
+                                        </md-input-container>
 
-                            <md-autocomplete class="col-md-5 " flex="100" ng-required="true" md-no-cache="ctrl.configInventory.noCache" md-selected-item="ctrl.configInventory.selectedItemInventory" md-search-text="ctrl.configInventory.searchText" md-selected-item-change="ctrl.selectedItemInventory(item)"
-                                md-items="item in ctrl.querySearchInventory(ctrl.configInventory.searchText)" md-item-text="item.Name" md-min-length="0" md-input-name="Name" md-floating-label="Inventory">
-                                <md-item-template>
-                                    <span md-highlight-text="ctrl.configInventory.searchText" md-highlight-flags="^i">{{item.Name}}</span>
-                                </md-item-template>
-                                <md-not-found>
-                                    ไม่พบข้อมูลที่ตรงกับ "{{ctrl.configInventory.searchText}}"
-                                </md-not-found>
-                            </md-autocomplete>
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>นามสกุล</label>
+                                            <input ng-model="modelSave.SURNAME_TH" ng-disabled="false" required>
+                                        </md-input-container>
 
-                            <md-input-container class="pl-3 col-md-2 " ng-if="typeAdd">
-                                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.addDevice()">
-                                        <i class="fas fa-plus fa-sm text-white-50"></i> Add Device
-                                    </button>
-                            </md-input-container>
-                        </div>
-                    </form>
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Department</label>
+                                            <input ng-model="modelSave.DEPARTMENT" ng-disabled="false">
+                                        </md-input-container>
+                                    </div>
 
-                    <section class="pt-3" ng-if="typeAdd">
-                        <div class="pb-5">
-                            <grid-search flex="100" g-option="ctrl.gridOptions" on-callback-del="ctrl.gridCallbackDel">
-                            </grid-search>
-                        </div>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Location</label>
+                                            <input ng-model="modelSave.LOCATION" ng-disabled="false">
+                                        </md-input-container>
+                                    </div>
 
-                        <div class="footer-form-button pt-5" layout="row" layout-align="center center">
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>E-Mail</label>
+                                            <input type="email" ng-model="modelSave.EMAIL" ng-disabled="false" required>
+                                        </md-input-container>
+                                    </div>
 
-                            <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-click="ctrl.saveFormAdd()">
-                                Save
-                            </md-button>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Nickname</label>
+                                            <input ng-model="modelSave.NICKNAME" ng-disabled="false">
+                                        </md-input-container>
+                                    </div>
 
-                            <md-button type="button" class="md-raised md-secondary" layout="row" layout-align="center center" ng-click="ctrl.cancelForm()">
-                                Cancel
-                            </md-button>
-                        </div>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>IP Address</label>
+                                            <input ng-model="modelSave.IPAddress" ng-disabled="false">
+                                        </md-input-container>
+                                    </div>
 
-                    </section>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Tel.</label>
+                                            <input type="call" name="Tel" ng-model="modelSave.TEL" ng-disabled="false"
+                                                autocomplete="off">
+                                        </md-input-container>
+                                    </div>
 
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>สถานะ</label>
+                                            <md-select name="STATUS_ID" ng-model="modelSave.STATUS_ID">
+                                                <md-option value="676D96D5C4C54A83BB2C9B657FD02C66">พนักงาน</md-option>
+                                                <md-option value="C7FFD4D943CB48C2BB2BEC3D350D7B7F">เจ้าหน้าที่ IT</md-option>
+                                                <md-option value="DF4EA7139B204A0D81EF06EADB40FA05">ผู้จัดการ</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    
+
+
+                                    <div class="footer-form-button" layout="row" layout-align="center center">
+                                        <md-button type="submit" class="md-raised md-primary" layout="row"
+                                            layout-align="center center" ng-click="saveForm()">
+                                            Save
+                                        </md-button>
+
+                                        <md-button type="button" class="md-raised md-secondary" layout="row"
+                                            layout-align="center center" ng-click="ctrl.cancelForm()">
+                                            Cancel
+                                        </md-button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </md-content>
+                    </div>
                 </div>
             </div>
         </div>
