@@ -22,13 +22,19 @@ app.controller("managerController", ['$scope', '$rootScope', '$location', '$rout
                 ID: 4,
                 STATUS: "แก้ไขเรียบร้อย",
                 VALUE: "แก้ไขเรียบร้อย"
-            }
+            },
+            {
+                ID: 5,
+                STATUS: "จบงาน",
+                VALUE: "จบงาน"
+            },
 
         ]
 
         this.init = function() {
             _this.searchRequest()
         }
+
 
         this.gridOptions = {
             gridID: 'gridSearchRequest',

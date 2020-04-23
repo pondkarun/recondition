@@ -40,7 +40,12 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
                 ID: 4,
                 STATUS: "แก้ไขเรียบร้อย",
                 VALUE: "แก้ไขเรียบร้อย"
-            }
+            },
+            {
+                ID: 5,
+                STATUS: "จบงาน",
+                VALUE: "จบงาน"
+            },
 
         ]
 
@@ -94,6 +99,10 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
             })
         }
 
+        this.print = () => {
+            window.open(location.origin + "/app/report/report.html?id=" + _this.typePage.ID, '_blank');
+        }
+
         const getRequestIT = (ID) => {
             loading.open();
             // console.log("getRequestIT ID", ID);
@@ -105,7 +114,7 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
                     _this.modelSave = res.data
                 }
 
-                if (_this.modelSave.STATUS == "แก้ไขเรียบร้อย") {
+                if (_this.modelSave.STATUS == "แก้ไขเรียบร้อย" || _this.modelSave.STATUS == "จบงาน") {
                     $scope.isDisabled = true;
                 }
 

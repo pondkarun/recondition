@@ -41,7 +41,8 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Detail</label>
-                            <textarea ng-model="ctrl.modelSave.REMARK" rows="3" md-select-on-focus ng-disabled="true"></textarea>
+                            <!-- REMARK -->
+                            <textarea ng-model="ctrl.modelSave.DETAIL" rows="3" md-select-on-focus ng-disabled="true"></textarea>
                         </md-input-container>
 
                         <md-input-container class="md-block" flex-gt-sm>
@@ -70,6 +71,10 @@
 
                                 <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS != 'แจ้งซ้อม' && !isDisabled" ng-click="ctrl.saveForm()">
                                     Save
+                                </md-button>
+
+                                <md-button type="submit" class="md-raised md-primary" layout="row" layout-align="center center" ng-if="ctrl.modelSave.STATUS == 'แก้ไขเรียบร้อย' || ctrl.modelSave.STATUS == 'จบงาน'" ng-click="ctrl.print()">
+                                    Print
                                 </md-button>
 
                                 <md-button type="button" class="md-raised md-secondary" layout="row" layout-align="center center" ng-click="ctrl.cancelForm()">

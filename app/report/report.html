@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>IT SERVICE REQUEST</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+        
+        .form-check-inline {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-left: 0;
+            margin-right: 5.75rem;
+        }
+        
+        @media print {
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+            }
+            .thead-dark {
+                color: #fff;
+                background-color: #343a40;
+                border-color: #454d55;
+            }
+            .table .thead-dark th {
+                color: #fff;
+                background-color: #343a40;
+                border-color: #454d55;
+            }
+        }
+    </style>
+</head>
+
+<body onload='window.print()'>
+    <div class="container">
+        <div class="text-center pb-4">
+            <h1><b>IT SERVICE REQUEST</b></h1>
+        </div>
+        <div class="row text-center">
+            <div class="col-6">
+                <p>No.................<span id="SERVICES_CODE" class="p-1"></span>.................</p>
+            </div>
+            <div class="col-6">
+                <p>วันที่.................<span id="CreateDate" class="p-1"></span>.................</p>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">รายการ</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="text-center">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="TYPE_ID" id="CPU" value="793C7DF29D214C33924DAFA1BF4E32F4" disabled>
+                <label class="form-check-label" for="inlineRadio1">CPU</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="TYPE_ID" id="Mouse" value="92E854F950094B8589866210E14F34EF" disabled>
+                <label class="form-check-label" for="inlineRadio2">Mouse</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="TYPE_ID" id="Moniter" value="BA81AB50BE174B5C90475E8B8975E9C0" disabled>
+                <label class="form-check-label" for="inlineRadio3">Moniter</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="TYPE_ID" id="Keyboard" value="C9F6B65F818A4584BB063AB39A7D3EEB" disabled>
+                <label class="form-check-label" for="inlineRadio3">Keyboard</label>
+            </div>
+        </div>
+        <h4 class="p-2"><u><b></b>ปัญหา</u></h4>
+        <div class="text-center">
+            <textarea name="DETAIL" id="DETAIL" class="form-control" rows="5" disabled></textarea>
+        </div>
+
+        <div class="row text-center p-3">
+            <div class="col-6">
+                <p>ชื่อผู้แจ้งซ่อม.................<span id="NameUser" class="p-1"></span>.................</p>
+            </div>
+            <div class="col-6">
+                <p>Department.................<span id="DEPARTMENTUser" class="p-1"></span>.................</p>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">วิเคราะห์และแก้ไขปัญหา</th>
+                </tr>
+            </thead>
+        </table>
+        <h4 class="p-2"><u><b></b></u></h4>
+        <div class="text-center">
+            <textarea name="DETAIL" id="ANALYZE" class="form-control" rows="5" disabled></textarea>
+        </div>
+
+        <div class="row text-center p-3">
+            <div class="col-6">
+                <p>ชื่อวิเคราะห์และแก้ไขปัญหา.................<span id="NameStaff" class="p-1"></span>.................</p>
+            </div>
+            <div class="col-6">
+                <p>ชื่อผู้จัดการ.................<span id="NameMANAGER" class="p-1"></span>.................</p>
+            </div>
+        </div>
+        <div class="row text-center p-3">
+            <div class="col-6">
+                <p>วันที่รับเรื่อง.................<span id="START_DATE" class="p-1"></span>.................</p>
+            </div>
+            <div class="col-6">
+                <p> วันที่ปิดงาน.................<span id="END_DATE" class="p-1"></span>.................</p>
+            </div>
+        </div>
+        <div class="text-center p-3">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="MANAGER_STATUS" id="CPU" value="อนุมัติ" disabled>
+                <label class="form-check-label" for="inlineRadio1">อนุมัติ</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="MANAGER_STATUS" id="Mouse" value="ไม่อนุมัติ" disabled>
+                <label class="form-check-label" for="inlineRadio2">ไม่อนุมัติ</label>
+            </div>
+        </div>
+        <h4 class="p-2"><u><b>หมายเหตุ</b></u></h4>
+        <div class="text-center">
+            <textarea name="MANAGER_REMARK" id="MANAGER_REMARK" class="form-control" rows="5" disabled></textarea>
+        </div>
+
+
+    </div>
+    <script src="../../script/jquery-2-2.4.min.js"></script>
+    <script src="../../config.js"></script>
+    <script>
+        $(document).ready(() => {
+            var api_url = webURL.webApi + "request/getRequestEditViewService.php"
+            window.$_GET = location.search.substr(1).split("&").reduce((o, i) => (u = decodeURIComponent, [k, v] = i.split("="), o[u(k)] = v && u(v), o), {});
+            let ID = window.$_GET.id
+            $.ajax({
+                url: api_url,
+                method: "POST",
+                data: ID,
+                dataType: "html"
+            }).done((res) => {
+                var data = JSON.parse(res);
+                // console.log("data", data);
+
+                var $radios = $('input:radio[name=TYPE_ID]');
+                $radios.filter(`[value=${data.TYPE_ID}]`).prop('checked', true);
+
+                var $radios = $('input:radio[name=MANAGER_STATUS]');
+                $radios.filter(`[value=${data.MANAGER_STATUS}]`).prop('checked', true);
+
+                $("#CreateDate").text(data.CreateDate);
+                $("#DETAIL").text(data.DETAIL);
+                $("#ANALYZE").text(data.ANALYZE);
+                $("#MANAGER_REMARK").text(data.MANAGER_REMARK);
+                $("#NameUser").text(data.NameUser);
+                $("#DEPARTMENTUser").text(data.DEPARTMENTUser);
+                $("#NameStaff").text(data.NameStaff);
+                $("#DEPARTMENTStaff").text(data.DEPARTMENTStaff);
+                $("#NameMANAGER").text(data.NameMANAGER);
+                $("#START_DATE").text(data.START_DATE);
+                $("#END_DATE").text(data.END_DATE);
+                $("#SERVICES_CODE").text(data.SERVICES_CODE);
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
