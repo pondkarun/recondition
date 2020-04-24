@@ -18,9 +18,9 @@
 
 
                                     <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm required>
+                                        <md-input-container class="md-block" flex-gt-sm>
                                             <label>คำนำหน้า</label>
-                                            <md-select name="STATUS_ID" ng-model="modelSave.PREFIX_ID">
+                                            <md-select name="STATUS_ID" ng-model="modelSave.PREFIX_ID" required>
                                                 <md-option value="406EBE42EE984C829CD376D888CA3282">นางสาว</md-option>
                                                 <md-option value="DEE88C36336A4A0F9EB6D32417B17786">นาง</md-option>
                                                 <md-option value="9C82BBE7B7FC4D5EA839BA9EB504790C">นาย</md-option>
@@ -38,9 +38,9 @@
                                             <input ng-model="modelSave.SURNAME_TH" ng-disabled="false" required>
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex-gt-sm required>
+                                        <md-input-container class="md-block" flex-gt-sm>
                                             <label>Department</label>
-                                            <input ng-model="modelSave.DEPARTMENT" ng-disabled="false">
+                                            <input ng-model="modelSave.DEPARTMENT" ng-disabled="false" required>
                                         </md-input-container>
                                     </div>
 
