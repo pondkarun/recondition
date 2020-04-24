@@ -1,16 +1,16 @@
 'use strict'
 
 app.controller("accountController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings) {
         let _this = this;
         $scope.modelSave = {};
         _this.ID = userService.getID();
-        this.init = function() {
+        this.init = function () {
             getUserProfile(_this.ID)
         }
         $scope.saveForm = () => {
 
-
+            
             if (!$scope.modelSave.PASSWORD || !$scope.modelSave.EMAIL) { //เช็คว่ากรอกข้อมูลครบไหม
                 showAlertBox(msgSettings.msgValidForm, null);
             } else if (md5($scope.modelSave.PASSWORD) != $scope.modelSave.PASSWORD_OLD) { //เช็คว่า Passwordเก่า ถูกไหม
@@ -34,7 +34,7 @@ app.controller("accountController", ['$scope', '$rootScope', '$location', '$rout
                             NICKNAME: $scope.modelSave.NICKNAME,
                             IPAddress: $scope.modelSave.IPAddress,
                             TEL: $scope.modelSave.TEL,
-                            PASSWORD: md5($scope.modelSave.PASSWORD_NEW),
+                            PASSWORD: md5($scope.modelSave.NEW_PASSWORD),
                         }
                         saveData(Save);
                     } else {

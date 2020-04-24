@@ -37,11 +37,10 @@ try {
     FROM services AS s 
     INNER JOIN peripeteias AS p ON s.PERIPETEIA_ID = p.ID
     INNER JOIN data_topics AS d ON p.TYPE_ID = d.ID
-    INNER JOIN employees AS e ON s.STAF_ID = e.ID
-    INNER JOIN employees AS ee ON s.USER_ID  = ee.ID
+    LEFT JOIN employees AS e ON  e.ID = s.STAF_ID 
+    LEFT JOIN employees AS ee ON ee.ID = s.USER_ID
     LEFT JOIN employees AS m ON m.ID = s.MANAGER_ID 
-    
-    
+  
     WHERE s.ID = '".$ID."'";
     $result = $condb->query($sql);
 
