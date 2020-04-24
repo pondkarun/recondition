@@ -35,6 +35,8 @@ app.controller("appController", ['$scope', '$rootScope', '$location', '$routePar
             let StatusID = userService.getStatusID()
             $http.post(webURL.webApi + "menu/menuService.php", StatusID).then((res) => {
                 // console.log("res.data", res.data);
+                $scope.positionName = userService.getnameTH();
+                // console.log("$scope.positionName" , $scope.positionName);
                 for (let i = 0; i < res.data.length; i++) {
                     $scope.menuShow.push(res.data[i]);
                 }
