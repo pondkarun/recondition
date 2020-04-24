@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body onload='window.print()'>
+<body>
     <div class="container">
         <div class="text-center pb-4">
             <h1><b>IT SERVICE REQUEST</b></h1>
@@ -171,7 +171,7 @@
                 $("#START_DATE").text(data.START_DATE);
                 $("#END_DATE").text(data.END_DATE);
                 $("#SERVICES_CODE").text(data.SERVICES_CODE);
-
+                window.print();
             });
 
         });

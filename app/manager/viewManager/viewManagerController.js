@@ -1,7 +1,7 @@
 'use strict'
 
 app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$routeParams', 'userService', '$http', 'customDialog', 'msgSettings', 'commonService',
-    function($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
+    function ($scope, $rootScope, $location, $routeParams, userService, $http, customDialog, msgSettings, commonService) {
         let _this = this;
         $scope.isDisabled = false;
         this.modelSave = {
@@ -16,40 +16,40 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
         };
         this.listType = [];
         this.listApprove = [{
-                ID: 1,
-                STATUS: "อนุมัติ"
-            },
-            {
-                ID: 2,
-                STATUS: "ไม่อนุมัติ"
-            }
+            ID: 1,
+            STATUS: "อนุมัติ"
+        },
+        {
+            ID: 2,
+            STATUS: "ไม่อนุมัติ"
+        }
         ];
 
 
         $scope.listStatus = [{
-                ID: 2,
-                STATUS: "แจ้งซ้อม",
-                VALUE: "แจ้งซ้อม"
-            },
-            {
-                ID: 3,
-                STATUS: "รอการอนุมัติของ",
-                VALUE: "รอการอนุมัติของ"
-            },
-            {
-                ID: 4,
-                STATUS: "แก้ไขเรียบร้อย",
-                VALUE: "แก้ไขเรียบร้อย"
-            },
-            {
-                ID: 5,
-                STATUS: "จบงาน",
-                VALUE: "จบงาน"
-            },
+            ID: 2,
+            STATUS: "แจ้งซ้อม",
+            VALUE: "แจ้งซ้อม"
+        },
+        {
+            ID: 3,
+            STATUS: "รอการอนุมัติของ",
+            VALUE: "รอการอนุมัติของ"
+        },
+        {
+            ID: 4,
+            STATUS: "แก้ไขเรียบร้อย",
+            VALUE: "แก้ไขเรียบร้อย"
+        },
+        {
+            ID: 5,
+            STATUS: "จบงาน",
+            VALUE: "จบงาน"
+        },
 
         ]
 
-        this.init = function() {
+        this.init = function () {
             _this.typePage = $routeParams;
             getTypeInventory();
             getRequestIT(_this.typePage.ID);
@@ -73,6 +73,7 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
                 }).catch((err) => {
                     showAlertBox(msgSettings.msgNotSave, null);
                 }).finally(() => {
+                    _this.print();
                     $location.path("manager");
                 });
             }
@@ -91,7 +92,7 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
                 // console.log("res.data", res.data);
                 loading.close();
                 _this.listType = res.data
-                    // console.log("listType", _this.listType);
+                // console.log("listType", _this.listType);
             }).catch((err) => {
                 console.log("Error");
                 loading.close();
@@ -100,7 +101,7 @@ app.controller("viewManagerController", ['$scope', '$rootScope', '$location', '$
         }
 
         this.print = () => {
-            window.open(location.origin + "/app/report/report.html?id=" + _this.typePage.ID, '_blank');
+            window.open(location.origin + "/recondition/app/report/report.html?id=" + _this.typePage.ID, '_blank');
         }
 
         const getRequestIT = (ID) => {
