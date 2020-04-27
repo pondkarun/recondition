@@ -1,6 +1,6 @@
 <div ng-controller="reportController as ctrl" ng-init="ctrl.init()">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">รายงานสรุปผลการประเมินการปฏิบัติงาน</h1>
+        <h1 class="h3 mb-0 text-gray-800">รายงาน</h1>
     </div>
 
 
@@ -14,74 +14,132 @@
 
                     <div layout="row">
                         <h4 class="pr-3">Search :</h4>
-                        
+
                         <md-input-container flex="15">
                             <label>Start Date</label>
-                            <md-datepicker ng-model="ctrl.modelSearch.START_DATE" md-open-on-focus ng-required="ctrl.modelSearch.END_DATE">
+                            <md-datepicker ng-model="ctrl.modelSearch.START_DATE" md-open-on-focus
+                                ng-required="ctrl.modelSearch.END_DATE">
                             </md-datepicker>
                         </md-input-container>
 
                         <md-input-container flex="15">
                             <label>End Date</label>
-                            <md-datepicker ng-model="ctrl.modelSearch.END_DATE" md-open-on-focus ng-required="ctrl.modelSearch.START_DATE">
+                            <md-datepicker ng-model="ctrl.modelSearch.END_DATE" md-open-on-focus
+                                ng-required="ctrl.modelSearch.START_DATE">
                             </md-datepicker>
 
                         </md-input-container>
                         <md-input-container>
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="ctrl.searchReport()">
-                                    <i class="fas fa-search fa-sm text-white-50"></i> Search
-                                </button>
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" ng-click="ctrl.clearReport()">
-                                    <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
-                                </button>
-                        </md-input-container>
-                        
-                    </div>
-                   
-
-
-                    <div>
-                        <md-input-container flex="">
-                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" ng-click="printDiv()">
-                                <i class="fas fa-print fa-sm text-white-50"></i> Print
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+                                ng-click="ctrl.searchReport()">
+                                <i class="fas fa-search fa-sm text-white-50"></i> Search
+                            </button>
+                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm"
+                                ng-click="ctrl.clearReport()">
+                                <i class="fas fa-repeat fa-sm text-white-50"></i> Reset
                             </button>
                         </md-input-container>
-                        <div id="printTable">
-                            <div class="page-list">
 
-                                <h3 style="text-align: center; padding-bottom: 10px;">รายงานสรุปผลการประเมินการปฏิบัติงาน</h3>
-                                <table class="table table-bordered" width="100%" cellspacing="0" border="1" cellpadding="3">
-                                    <thead style="text-align: center;">
-                                        <tr>
-                                            <th>List</th>
-                                            <th>Name</th>
-                                            <th>ID</th>
-                                            <th>Standard</th>
-                                            <th>Non Standard</th>
-                                            <th>Job Total</th>
-                                            <th>Satisfaction</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody style="text-align: center;">
-                                        <tr ng-repeat="x in ctrl.listReport">
-                                            <td>{{$index + 1}}</td>
-                                            <td style="text-align: left; padding-left: 5px;">{{x.Name}}</td>
-                                            <td >{{x.EMPLOYEE_CODE}}</td>
-                                            <td>{{x.total_work | number}}</td>
-                                            <td>{{x.NonStandard | number}}</td>
-                                            <td>{{x.total_work | number}}</td>
-                                            <td>{{x.AVG | number}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
                     </div>
-                    <div ng-if="ctrl.listReport.length == 0">
-                        <p class="text-center">-- ไม่พบข้อมูล --</p>
+
+                    <div>
+                        <md-tabs class="md-primary" md-center-tabs>
+                            <md-tab label="รายงานสรุปผลการประเมินการปฏิบัติงาน">
+                                <md-input-container flex="">
+                                    <button type="submit"
+                                        class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+                                        ng-click="printDiv()">
+                                        <i class="fas fa-print fa-sm text-white-50"></i> Print
+                                    </button>
+                                </md-input-container>
+                                <div id="printTable">
+                                    <div class="page-list">
+                                        <h3 style="text-align: center; padding-bottom: 10px;">
+                                            รายงานสรุปผลการประเมินการปฏิบัติงาน</h3>
+                                        <table class="table table-bordered" width="100%" cellspacing="0" border="1"
+                                            cellpadding="3">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th>List</th>
+                                                    <th>Name</th>
+                                                    <th>ID</th>
+                                                    <th>Standard</th>
+                                                    <th>Non Standard</th>
+                                                    <th>Job Total</th>
+                                                    <th>Satisfaction</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody style="text-align: center;">
+                                                <tr ng-repeat="x in ctrl.listReport1">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td style="text-align: left; padding-left: 5px;">{{x.Name}}</td>
+                                                    <td>{{x.EMPLOYEE_CODE}}</td>
+                                                    <td>{{x.total_work | number}}</td>
+                                                    <td>{{x.NonStandard | number}}</td>
+                                                    <td>{{x.total_work | number}}</td>
+                                                    <td>{{x.AVG | number}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div ng-if="ctrl.listReport1.length == 0">
+                                    <p class="text-center">-- ไม่พบข้อมูล --</p>
+                                </div>
+                            </md-tab>
+                            <md-tab label="รายงานสรุปแจ้งซ่อม">
+                                <md-input-container flex="">
+                                    <button type="submit"
+                                        class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+                                        ng-click="printDiv2()">
+                                        <i class="fas fa-print fa-sm text-white-50"></i> Print
+                                    </button>
+                                </md-input-container>
+                                <div id="printTable2">
+                                    <div class="page-list">
+                                        <h3 style="text-align: center; padding-bottom: 10px;">
+                                            รายงานสรุปแจ้งซ่อม</h3>
+                                        <table class="table table-bordered" width="100%" cellspacing="0" border="1"
+                                            cellpadding="3">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th>List</th>
+                                                    <th>Name</th>
+                                                    <th>ID</th>
+                                                    <th>รอการอนุมติ</th>
+                                                    <th>แก้ไขเรียบร้อย</th>
+                                                    <th>จบงาน</th>
+                                                    <th>รวม</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody style="text-align: center;">
+                                                <tr ng-repeat="x in ctrl.listReport2">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td style="text-align: left; padding-left: 5px;">{{x.Name}}</td>
+                                                    <td>{{x.EMPLOYEE_CODE}}</td>
+                                                    <td>{{x.total_wait_work | number}}</td>
+                                                    <td>{{x.total_edit_work | number}}</td>
+                                                    <td>{{x.total_end_work | number}}</td>
+                                                    <td>{{x.total | number}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div ng-if="ctrl.listReport2.length == 0">
+                                    <p class="text-center">-- ไม่พบข้อมูล --</p>
+                                </div>
+                            </md-tab>
+                        </md-tabs>
+
                     </div>
+
+
+                   
                 </div>
             </div>
         </div>
@@ -99,5 +157,9 @@
         color: black;
         height: 500px;
         overflow-x: auto;
+    }
+
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        min-height: 650px;
     }
 </style>

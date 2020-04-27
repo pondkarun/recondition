@@ -20,8 +20,9 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
             loading.open();
             $http.post(webURL.webApi + "report/reportService.php", _this.modelSearch).then((res) => {
                 console.log("res.data", res.data);
-                res.data.filter(e => e.AVG = e.AVG ? e.AVG : 0) 
-                this.listReport = res.data
+                res.data[0].filter(e => e.AVG = e.AVG ? e.AVG : 0) 
+                this.listReport1 = res.data[0]
+                this.listReport2 = res.data[1]
                 loading.close();
             }).catch((err) => {
                 console.log("Error");
@@ -46,6 +47,14 @@ app.controller("reportController", ['$scope', '$rootScope', '$location', '$route
 
         $scope.printDiv = () => {
             var divToPrint = document.getElementById("printTable");
+            var newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
+
+        $scope.printDiv2 = () => {
+            var divToPrint = document.getElementById("printTable2");
             var newWin = window.open("");
             newWin.document.write(divToPrint.outerHTML);
             newWin.print();
