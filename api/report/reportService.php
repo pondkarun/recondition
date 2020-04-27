@@ -62,7 +62,7 @@ try {
         (SELECT COUNT(ID) FROM services WHERE STATUS = 'รอการอนุมัติของ' AND STAF_ID = e.ID AND CreateDate BETWEEN  '" . $START_DATE . "' AND  '" . $END_DATE . "') AS total_wait_work,
         (SELECT COUNT(ID) FROM services WHERE STATUS = 'แก้ไขเรียบร้อย' AND STAF_ID = e.ID AND CreateDate BETWEEN  '" . $START_DATE . "' AND  '" . $END_DATE . "') AS total_edit_work,
         (SELECT COUNT(ID) FROM services WHERE STATUS = 'จบงาน' AND STAF_ID = e.ID AND CreateDate BETWEEN  '" . $START_DATE . "' AND  '" . $END_DATE . "') AS total_end_work,
-        (SELECT COUNT(ID) FROM services WHERE 1  AND STAF_ID = e.ID AND CreateDate BETWEEN  '" . $START_DATE . "' AND  '" . $END_DATE . "') AS tota
+        (SELECT COUNT(ID) FROM services WHERE 1  AND STAF_ID = e.ID AND CreateDate BETWEEN  '" . $START_DATE . "' AND  '" . $END_DATE . "') AS total
       ";
     } else {
         $query2 .= "
